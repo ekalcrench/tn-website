@@ -1,0 +1,21 @@
+@use "sass:math";
+
+@function vw($size-in-px) {
+  $size-in-vw: math.div($size-in-px * 100, 1920);
+  @return #{$size-in-vw}vw;
+}
+
+@function vh($size-in-px) {
+  $size-in-vw: math.div($size-in-px * 100, 1080);
+  @return #{$size-in-vw}vh;
+}
+
+@function vw-tab($size-in-px) {
+  $size-in-vw: math.div($size-in-px * 100, 1024);
+  @return #{$size-in-vw}vw;
+}
+
+@function vw-mobile($size-in-px) {
+  $size-in-vw: math.div($size-in-px * 100, 601);
+  @return #{$size-in-vw}vw;
+}

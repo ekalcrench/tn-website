@@ -2,14 +2,16 @@ import "./App.scss";
 import { BrowserRouter } from "react-router-dom";
 import { SideMenuComponent } from "../components/side-menu";
 import routes from "../routes";
+import { NavBarComponent } from "../components/nav-bar";
 
 function App() {
   return (
-    <div>
+    <div className="app-container">
       <SideMenuComponent />
-      <BrowserRouter>
-        {routes}
-      </BrowserRouter>
+      <div className="app-container-right">
+        <NavBarComponent />
+        <BrowserRouter>{routes}</BrowserRouter>
+      </div>
     </div>
   );
 }
