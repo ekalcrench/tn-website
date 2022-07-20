@@ -47,6 +47,14 @@ export default function SideMenuComponent() {
             alt="assignment-icon"
             className="list-icon"
           />
+          <div className="list-text">Genset Monitoring</div>
+        </div>
+        <div className="side-menu-list">
+          <img
+            src={AssignmentIcon}
+            alt="assignment-icon"
+            className="list-icon"
+          />
           <div className="list-text">Master Data Uploader</div>
         </div>
         <div className="side-menu-list">
