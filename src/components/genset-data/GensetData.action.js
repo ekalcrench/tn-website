@@ -25,18 +25,24 @@ const getDataGensetMonitoringFailure = (error) => {
   };
 };
 
-export const getDataCurrentPageAction = (
+export const getDataGensetMonitoringAction = (
   indexDataStartRequest,
   dataLengthRequest
 ) => {
   return (dispatch) => {
     dispatch(getDataGensetMonitoringRequest());
     axios
-      .get(API.GENSET)
+      .get(
+        API.GENSET_DATA +
+          "?_start=" +
+          indexDataStartRequest +
+          "&_limit=" +
+          dataLengthRequest
+      )
       .then((response) => {
         const data = {
-           responseData: response.data,
-           indexDataStartRequest: indexDataStartRequest + dataLengthRequest
+          responseData: response.data,
+          indexDataStartRequest: indexDataStartRequest + dataLengthRequest,
         };
         dispatch(getDataGensetMonitoringSuccess(data));
       })

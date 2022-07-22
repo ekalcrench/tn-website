@@ -5,10 +5,9 @@ import { GensetMonitoring } from "../pages/genset-monitoring";
 
 const routes = (
   <Routes>
-    <Route path={Menu.LOGIN} element={<Navigate replace to={Menu.HOME} />} />
     <Route path={Menu.HOME} element={<GensetMonitoring />} />
     <Route path="*" element={<Navigate replace to={Menu.HOME} />} />
   </Routes>
 );
 
-export default routes
+export default routes;

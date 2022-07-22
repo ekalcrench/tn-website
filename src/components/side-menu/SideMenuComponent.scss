@@ -39,7 +39,25 @@
           width: vw(18);
         }
       }
+      .side-menu-list:hover{
+        cursor: pointer;
+      }
+      .side-menu-list-active{
+        background-color: map-get($colors, primary );
+      }
+      .dropdown-none{
+        display: none;
+      }
+      .dropdown-block{
+        display: block;
+        .list-icon{
+          margin-left: vw(37);
+        }
+      }
     }
+  }
+  .side-menu-fix-height{
+    height: 540px;
   }
 }
 
@@ -70,6 +88,10 @@
     margin-top: vw-tab(10);
   }
 
+  .side-menu-list:hover{
+    cursor: pointer;
+  }
+
   .list-icon {
     height: vw-tab(13);
     width: vw-tab(12);
@@ -85,6 +107,10 @@
   .list-text {
     font-family: "Lato-Bold";
     font-size: vw-tab(13);
+  }
+
+  .side-menu-fix-height{
+    height: 540px;
   }
 }
 
@@ -113,6 +139,10 @@
     height: vw-mobile(35);
     margin-bottom: vw-mobile(8);
     margin-top: vw-mobile(8);
+  }
+
+  .side-menu-list:hover{
+    cursor: pointer;
   }
 
   .list-icon {

@@ -215,6 +215,9 @@
       }
     }
   }
+  .fix-height{
+    height: calc(540px - vw(88));
+  }
 }
 
 @media (min-width: 601px) and (max-width: 1024px) {
@@ -429,6 +432,9 @@
         }
       }
     }
+  }
+  .fix-height{
+    height: calc(540px - vw-tab(72));
   }
 }
 

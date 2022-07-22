@@ -1,19 +1,12 @@
-import { connect } from "react-redux";
 import GensetMonitoring from "./GensetMonitoring";
-import { getDataCurrentPageAction } from "./GensetMonitoring.action";
+import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
   return {
-    gensetData: state.gensetMonitoringPage.gensetData,
+    sideMenu: state.sideMenuComponent.sideMenuData,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getDataCurrentPage: (indexDataStartRequest, dataLengthRequest) => dispatch(getDataCurrentPageAction(indexDataStartRequest, dataLengthRequest)),
-  };
-};
-
-const gensetMonitoring = connect(mapStateToProps, mapDispatchToProps)(GensetMonitoring)
+const gensetMonitoring = connect(mapStateToProps)(GensetMonitoring);
 
 export { gensetMonitoring as GensetMonitoring };

@@ -1,0 +1,91 @@
+@import "../../theme/_variables.scss";
+@import "../../theme/_functions.scss";
+
+@media (min-width: 1024px) {
+  .background {
+    background-color: map-get($colors, page-background);
+    height: calc(100vh - vw(88));
+    .container {
+      display: block;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      padding-top: vw(40);
+      font-family: "Lato-Medium";
+      .header {
+        color: map-get($colors, danger);
+        font-size: vw(15);
+        font-family: "Lato-Bold";
+        line-height: 1.6;
+      }
+      .body {
+        display: flex;
+        justify-content: center;
+        margin-top: vw(30);
+        .genset {
+          margin-top: vw(20);
+          .genset-img {
+            width: vw(560);
+          }
+          .genset-location {
+            display: flex;
+            justify-content: center;
+            margin-top: vw(10);
+          }
+        }
+        .status {
+          margin-left: vw(70);
+          width: vw(260);
+          margin-top: auto;
+          margin-bottom: auto;
+          line-height: vw(70);
+          .status-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: vw(27);
+            margin-bottom: vw(10);
+          }
+          .status-body {
+            display: flex;
+            justify-content: space-between;
+            font-size: vw(22);
+            .status-color-green {
+              border-style: solid;
+              border-color: map-get($colors, secondary);
+              background-color: map-get($colors, secondary);
+              width: vw(40);
+              height: vw(40);
+              margin-right: vw(12);
+              margin-top: auto;
+              margin-bottom: auto;
+            }
+            .status-color-red {
+              border-style: solid;
+              border-color: map-get($colors, danger);
+              background-color: map-get($colors, danger);
+              width: vw(40);
+              height: vw(40);
+              margin-right: vw(12);
+              margin-top: auto;
+              margin-bottom: auto;
+            }
+          }
+        }
+      }
+    }
+    .loading{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      font-size: vw(30);
+      font-family: 'Lato-Bold';
+    }
+  }
+  .fix-height {
+    height: calc(540px - vw(88));
+  }
+}
+
+@media (max-width: 1024px) {
+}
