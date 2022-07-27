@@ -1,0 +1,266 @@
+@import url(../../theme/fonts.scss);
+@import "../../theme/_variables.scss";
+@import "../../theme/_functions.scss";
+
+.background-customer {
+  background-color: map-get($colors, page-background);
+  height: calc(100% - vw(32));
+  width: calc(vw(1920) - vw(241));
+  padding-top: vw(32);
+  .body {
+    margin-left: auto;
+    margin-right: auto;
+    width: vw(1615);
+    .body-header {
+      font-size: vw(17);
+      height: vw(45);
+      width: 100%;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      .home {
+        color: map-get($colors, home-color);
+        margin-left: vw(20);
+        margin-right: vw(10);
+      }
+      .arrow-right {
+        color: map-get($colors, home-color);
+      }
+      .current-component {
+        margin-left: vw(10);
+      }
+    }
+    .add-customer {
+      height: vw(40);
+      width: vw(145.66);
+      margin-top: vw(24);
+      margin-bottom: vw(32);
+      background-color: map-get($colors, tn-color);
+      border-radius: vw(5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Lato-Bold";
+      font-size: vw(14);
+      color: white;
+    }
+    .add-customer:hover {
+      cursor: pointer;
+    }
+    .table-filter {
+      display: flex;
+      margin-bottom: vw(32);
+      .table-filter-item {
+        display: flex;
+        width: vw(203.22);
+        height: vw(40);
+        box-shadow: 0px vw(4) vw(4) 0px map-get($colors, shadow-color);
+        border-radius: vw(5);
+        margin-right: vw(27.78);
+        .table-filter-item-title {
+          background-color: white;
+          width: vw(157-18.98);
+          height: 100%;
+          display: flex;
+          align-items: center;
+          padding-left: vw(18.98);
+          font-size: vw(14);
+          font-family: "Lato-Medium";
+        }
+        .dropdown-icon {
+          background-color: map-get($colors, tn-color);
+          width: vw(46.22);
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          .dropdown-icon-item {
+            width: vw(10.92);
+            height: vw(5.46);
+          }
+        }
+        .dropdown-icon:hover {
+          cursor: pointer;
+        }
+      }
+      .table-filter-search {
+        margin-left: vw(716.96);
+        margin-right: vw(16);
+        display: flex;
+        align-items: center;
+        width: vw(342.95);
+        height: vw(40);
+        box-shadow: 0px vw(4) vw(4) 0px map-get($colors, shadow-color);
+        background-color: white;
+        border-radius: vw(5);
+        .table-filter-search-title {
+          color: map-get($colors, placeholder);
+          margin-left: vw(23.47);
+          font-size: vw(16);
+        }
+        .search-icon {
+          margin-left: vw(234.44);
+          width: vw(29.79);
+          height: vw(29.79);
+          background-color: map-get($colors, tn-color);
+          border-radius: vw(5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .search-icon-item {
+            width: vw(13.99);
+            height: vw(13.99);
+          }
+        }
+        .search-icon:hover {
+          cursor: pointer;
+        }
+      }
+      .table-filter-reset {
+        background-color: map-get($colors, tn-color);
+        border-radius: vw(5);
+        width: vw(75.52);
+        height: vw(40);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: "Lato-Bold";
+        font-size: vw(14);
+      }
+      .table-filter-reset:hover {
+        cursor: pointer;
+      }
+    }
+    .table-header {
+      display: flex;
+      align-items: center;
+      height: vw(49.43);
+      width: 100%;
+      background-color: map-get($colors, tn-color);
+      color: white;
+      font-family: "Lato-Bold";
+      font-size: vw(14);
+      .customer-code {
+        margin-left: vw(83.93);
+        width: calc(vw(249.5) + vw(97));
+      }
+      .customer-name {
+        width: calc(vw(295.98) + vw(101));
+      }
+      .address {
+        width: calc(vw(444.52) + vw(51));
+      }
+      .city {
+        width: calc(vw(26) + vw(264.51));
+      }
+    }
+    .table-body {
+      .table-list {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        height: vw(68);
+        font-family: "Lato-Bold";
+        margin-bottom: vw(4);
+        .checkbox {
+          width: calc(vw(21.93) + vw(18.39) + vw(43.61));
+          .checkbox-item {
+            margin-left: vw(21.93);
+            margin-top: 0px;
+            margin-bottom: 0px;
+            margin-right: 0px;
+            width: vw(18.39);
+            height: vw(18.39);
+            border-color: map-get($colors, font-color);
+            border-style: solid;
+            border-image: none;
+            border-width: 20px;
+            padding: 0px;
+            background-color: white;
+          }
+        }
+        .customer-code {
+          width: calc(vw(249.5) + vw(97));
+          font-size: vw(14);
+        }
+        .customer-name {
+          width: calc(vw(295.98) + vw(101));
+          font-size: vw(14);
+        }
+        .address {
+          width: calc(vw(444.52) + vw(51));
+          font-size: vw(15);
+        }
+        .city {
+          width: calc(vw(26) + vw(264.51));
+          font-size: vw(15);
+        }
+      }
+    }
+    .pagination {
+      display: flex;
+      justify-content: space-between;
+      margin-top: vw(25.5);
+      font-size: vw(14);
+      .pagination-filter {
+        display: flex;
+        align-items: center;
+        .filter-entries {
+          margin-left: vw(10);
+          margin-right: vw(10);
+          background-color: white;
+          width: vw(71.57);
+          height: vw(40);
+          border-radius: vw(5);
+          box-shadow: 0px vw(4) vw(4) 0px map-get($colors, shadow-color);
+          display: flex;
+          align-items: center;
+          .entries{
+            width: 60%;
+            display: flex;
+            justify-content: center;
+          }
+          .dropdown-arrow {
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            .arrow-item {
+              width: vw(10.92);
+              height: vw(5.46);
+            }
+          }
+        }
+      }
+      .page {
+        display: flex;
+        height: vw(34.96);
+        box-shadow: 0px vw(4) vw(4) 0px map-get($colors, shadow-color);
+        .page-item {
+          width: vw(44.99);
+          background-color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-family: "Gotham-Regular";
+        }
+        .page-active {
+          background-color: map-get($colors, tn-color);
+          font-size: vw(13);
+          color: white;
+        }
+        .page-item-left {
+          border-top-left-radius: vw(5);
+          border-bottom-left-radius: vw(5);
+        }
+        .page-item-right {
+          border-top-right-radius: vw(5);
+          border-bottom-right-radius: vw(5);
+        }
+      }
+    }
+  }
+}
+.customer-fix-height {
+  height: 100%;
+}

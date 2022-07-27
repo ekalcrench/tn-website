@@ -1,15 +1,13 @@
 import React, { useLayoutEffect, useReducer, useEffect } from "react";
 import { Genset } from "../../assets/imgs";
-import "./GensetDashboard.scss";
-import { useWindowDimensions } from "../../helper/window-size";
+import "./GensetMonitoring.scss";
 import {
   GensetDashboardReducer,
   initialStateGensetDashboard,
-} from "./GensetDashboard.reducer";
-import { getGensetDashboardData } from "./GensetDashboard.action";
+} from "./GensetMonitoring.reducer";
+import { getGensetDashboardData } from "./GensetMonitoring.action";
 
-function GensetDashboard() {
-  const { height } = useWindowDimensions();
+function GensetMonitoring() {
   const [state, dispatch] = useReducer(
     GensetDashboardReducer,
     initialStateGensetDashboard
@@ -85,11 +83,11 @@ function GensetDashboard() {
   };
 
   return (
-    <div className={height > 540 ? "background" : "background fix-height"}>
+    <div className="background-genset">
        {renderPage()}
       {/* {state.loading ? renderLoading() : renderPage()} */}
     </div>
   );
 }
 
-export default GensetDashboard;
+export default GensetMonitoring;

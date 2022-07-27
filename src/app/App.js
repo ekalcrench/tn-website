@@ -5,13 +5,12 @@ import routes from "../routes";
 import { NavBarComponent } from "../components/nav-bar";
 
 function App() {
-
   return (
     <div className="app-container">
       <BrowserRouter>
-        <SideMenuComponent />
-        <div className="app-container-right">
-          <NavBarComponent />
+        <NavBarComponent />
+        <div className="app-container-down">
+          <SideMenuComponent />
           {routes}
         </div>
       </BrowserRouter>

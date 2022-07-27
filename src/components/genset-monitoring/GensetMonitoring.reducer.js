@@ -2,7 +2,7 @@ import {
   GENSET_DASHBOARD_DATA_REQUEST,
   GENSET_DASHBOARD_DATA_SUCCESS,
   GENSET_DASHBOARD_DATA_FAILURE,
-} from "./GensetDashboard.action";
+} from "./GensetMonitoring.action";
 
 export const initialStateGensetDashboard = {
   loading: true,

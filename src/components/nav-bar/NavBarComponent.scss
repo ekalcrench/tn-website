@@ -10,25 +10,30 @@
     display: flex;
     align-items: center;
     width: 100%;
-  }
-
-  .nav-bar-content {
-    display: flex;
-    width: 100%;
-    justify-content: right;
-    align-items: center;
-    margin-right: vw(70.2);
-  }
-
-  .nav-bar-text {
-    font-family: "Lato-Bold";
-    font-size: vw(20);
-    margin-right: vw(27.2);
-  }
-
-  .nav-bar-picture {
-    height: vw(48);
-    width: vw(48);
+    .nav-bar-left{
+      margin-left: vw(27);
+      display: flex;
+      .logo-tn{
+        width: vw(221.23);
+        height: vw(29.38);
+      }
+      .kotak-empat{
+        margin-left: vw(36.1);
+        width: vw(23.67);
+        height: vw(23.67);;
+      }
+    }
+    .nav-bar-right {
+      display: flex;
+      width: 100%;
+      justify-content: right;
+      align-items: center;
+      margin-right: vw(32.2);
+      .profile {
+        height: vw(50.12);
+        width: vw(50.53);
+      }
+    }
   }
 }
 
@@ -37,61 +42,69 @@
     position: sticky;
     top: 0;
     background-color: white;
-    height: vw-tab(72);
+    height: vw-tab(78);
     display: flex;
     align-items: center;
     width: 100%;
-  }
-
-  .nav-bar-content {
-    display: flex;
-    width: 100%;
-    justify-content: right;
-    align-items: center;
-    margin-right: vw-tab(40);
-  }
-
-  .nav-bar-text {
-    font-family: "Lato-Bold";
-    font-size: vw-tab(17);
-    margin-right: vw-tab(20);
-  }
-
-  .nav-bar-picture {
-    height: vw-tab(40);
-    width: vw-tab(40);
+    .nav-bar-left{
+      margin-left: vw-tab(25);
+      display: flex;
+      .logo-tn{
+        width: vw-tab(200);
+        height: vw-tab(27);
+      }
+      .kotak-empat{
+        margin-left: vw-tab(27);
+        width: vw-tab(21.8);
+        height: vw-tab(21.8);
+      }
+    }
+    .nav-bar-right {
+      display: flex;
+      width: 100%;
+      justify-content: right;
+      align-items: center;
+      margin-right: vw-tab(32.2);
+      .profile {
+        height: vw-tab(46);
+        width: vw-tab(46);
+      }
+    }
   }
 }
 
 @media (max-width: 601px) {
   .nav-bar {
-    position: absolute;
+    position: sticky;
     top: 0;
     background-color: white;
-    height: vw-mobile(72);
+    height: vw-mobile(75);
     display: flex;
     align-items: center;
     width: 100%;
-    /* X Y Blur (Spread) Color  */
-    box-shadow: 0px vw-mobile(3) vw-mobile(8) rgb(0 0 0 / 10%);
-  }
-
-  .nav-bar-content {
-    display: flex;
-    width: 100%;
-    justify-content: right;
-    align-items: center;
-    margin-right: vw-mobile(30);
-  }
-
-  .nav-bar-text {
-    font-family: "Lato-Bold";
-    font-size: vw-mobile(18);
-    margin-right: vw-mobile(20);
-  }
-
-  .nav-bar-picture {
-    height: vw-mobile(48);
-    width: vw-mobile(48);
+    .nav-bar-left{
+      margin-left: vw-mobile(25);
+      display: flex;
+      .logo-tn{
+        width: vw-mobile(200);
+        height: vw-mobile(27);
+      }
+      .kotak-empat{
+        margin-left: vw-mobile(27);
+        width: vw-mobile(21.8);
+        height: vw-mobile(21.8);
+      }
+    }
+    .nav-bar-right {
+      display: flex;
+      width: 100%;
+      justify-content: right;
+      align-items: center;
+      margin-right: vw-mobile(32.2);
+      .profile {
+        height: vw-mobile(46);
+        width: vw-mobile(46);
+      }
+    }
   }
 }

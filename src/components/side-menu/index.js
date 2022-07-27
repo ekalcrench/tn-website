@@ -1,5 +1,8 @@
 import SideMenuComponent from "./SideMenuComponent";
-import { setCurrentComponentAction, setCurrentMenuAction } from "./SideMenuComponent.action";
+import {
+  setCurrentComponentAction,
+  setJobExecutionAction,
+} from "./SideMenuComponent.action";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
@@ -11,10 +14,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setCurrentComponent: (data) => dispatch(setCurrentComponentAction(data)),
-    setCurrentMenu: (data) => dispatch(setCurrentMenuAction(data)),
+    setJobExecution: () => dispatch(setJobExecutionAction()),
   };
 };
 
-const sideMenuComponent = connect(mapStateToProps,mapDispatchToProps)(SideMenuComponent);
+const sideMenuComponent = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SideMenuComponent);
 
 export { sideMenuComponent as SideMenuComponent };

@@ -1,93 +1,134 @@
 import "./SideMenuComponent.scss";
-import { DcaLogo } from "../../assets/imgs";
-import { AssignmentIcon } from "../../assets/icons";
-import { Component_Name, Side_Menu } from "../../common/constants";
-import { useWindowDimensions } from "../../helper/window-size";
+import { TNPortalMaintenance } from "../../assets/imgs";
+import { AssignmentIcon, AssignmentIconActive, IconGensetMonitoring, IconGensetMonitoringActive } from "../../assets/icons";
+import { Component_Name } from "../../common/constants";
 
 export default function SideMenuComponent(props) {
-  const { height } = useWindowDimensions();
-
-  console.log(props.sideMenu);
 
   return (
     <div
-      className={height > 540 ? "side-menu" : "side-menu side-menu-fix-height"}
+      className="side-menu"
     >
+      {/* Logo */}
       <div>
-        <img src={DcaLogo} alt="logo" className="dca-logo" />
+        <img
+          src={TNPortalMaintenance}
+          alt="logo"
+          className="tn-portal-maintenance"
+        />
       </div>
       <div>
+        {/* Genset Monitoring */}
+        <div
+          className={
+            props.sideMenu.currentComponent === Component_Name.GENSET_MONITORING
+              ? "side-menu-list side-menu-list-active"
+              : "side-menu-list"
+          }
+          onClick={() =>
+            props.setCurrentComponent(Component_Name.GENSET_MONITORING)
+          }
+        >
+          <img
+            src={
+              props.sideMenu.currentComponent ===
+              Component_Name.GENSET_MONITORING
+                ? IconGensetMonitoringActive
+                : IconGensetMonitoring
+            }
+            alt="assignment-icon"
+            className="list-icon-genset-monitoring"
+          />
+          <div className="list-text">{Component_Name.GENSET_MONITORING}</div>
+        </div>
+        {/* Job Creation */}
+        <div className="side-menu-list side-menu-list-inactive">
+          <img
+            src={AssignmentIcon}
+            alt="assignment-icon"
+            className="list-icon"
+          />
+          <div className="list-text">Job Creation</div>
+        </div>
+        {/* Job Execution */}
         <div>
           {/* tombol */}
           <div
             className="side-menu-list"
-            onClick={() => props.setCurrentMenu(Side_Menu.GENSET_MONITORING)}
+            onClick={() => props.setJobExecution()}
           >
             <img
               src={AssignmentIcon}
               alt="assignment-icon"
               className="list-icon"
             />
-            <div className="list-text">Genset Monitoring</div>
+            <div className="list-text">Job Execution</div>
           </div>
           {/* content */}
           <div
             className={
-              props.sideMenu.currentMenu === Side_Menu.GENSET_MONITORING
+              props.sideMenu.jobExecutionMenu
                 ? "dropdown-block"
                 : "dropdown-none"
             }
           >
-            <div
-              className={
-                props.sideMenu.currentComponent === Component_Name.GENSET_DATA
-                  ? "side-menu-list side-menu-list-active"
-                  : "side-menu-list"
-              }
-              onClick={() =>
-                props.setCurrentComponent(Component_Name.GENSET_DATA)
-              }
-            >
+            <div className="side-menu-list side-menu-list-inactive">
               <img
                 src={AssignmentIcon}
                 alt="assignment-icon"
                 className="list-icon"
               />
-              <div className="list-text">Genset Data</div>
+              <div className="list-text">Jobs</div>
             </div>
-            <div
-              className={
-                props.sideMenu.currentComponent ===
-                Component_Name.GENSET_DASHBOARD
-                  ? "side-menu-list side-menu-list-active"
-                  : "side-menu-list"
-              }
-              onClick={() =>
-                props.setCurrentComponent(Component_Name.GENSET_DASHBOARD)
-              }
-            >
+            <div className="side-menu-list side-menu-list-inactive">
               <img
                 src={AssignmentIcon}
                 alt="assignment-icon"
                 className="list-icon"
               />
-              <div className="list-text">Genset Dashboard</div>
+              <div className="list-text">Report</div>
             </div>
           </div>
         </div>
-        <div>
-          {/* tombol */}
-          <div
-            className="side-menu-list"
-            onClick={() => props.setCurrentMenu(Side_Menu.FC_MONITORING)}
-          >
-            <img
-              src={AssignmentIcon}
-              alt="assignment-icon"
-              className="list-icon"
-            />
-            <div className="list-text">FC Monitoring</div>
-          </div>
+        {/* Performance */}
+        <div className="side-menu-list side-menu-list-inactive">
+          <img
+            src={AssignmentIcon}
+            alt="assignment-icon"
+            className="list-icon"
+          />
+          <div className="list-text">Performance</div>
+        </div>
+        {/* Maintenance History */}
+        <div className="side-menu-list side-menu-list-inactive">
+          <img
+            src={AssignmentIcon}
+            alt="assignment-icon"
+            className="list-icon"
+          />
+          <div className="list-text">Maintenance History</div>
+        </div>
+        {/* Master Customer */}
+        <div
+          className={
+            props.sideMenu.currentComponent === Component_Name.MASTER_CUSTOMER
+              ? "side-menu-list side-menu-list-active"
+              : "side-menu-list"
+          }
+          onClick={() =>
+            props.setCurrentComponent(Component_Name.MASTER_CUSTOMER)
+          }
+        >
+          <img
+            src={
+              props.sideMenu.currentComponent === Component_Name.MASTER_CUSTOMER
+                ? AssignmentIconActive
+                : AssignmentIcon
+            }
+            alt="assignment-icon"
+            className="list-icon"
+          />
+          <div className="list-text">{Component_Name.MASTER_CUSTOMER}</div>
         </div>
       </div>
     </div>

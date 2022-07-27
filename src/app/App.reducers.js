@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
 import { SideMenuReducer } from "../components/side-menu/SideMenuComponent.reducer";
-import { GensetMonitoringReducer } from "../components/genset-data/GensetData.reducer";
 import { LOGIN_ACTION, LOGOUT_ACTION } from "./App.action";
 
 const initialState = {
@@ -27,7 +26,6 @@ function userDataReducer(state = initialState, action) {
 
 const AppReducer = combineReducers({
   userData: userDataReducer,
-  gensetMonitoringPage: GensetMonitoringReducer,
   sideMenuComponent: SideMenuReducer,
 });
 

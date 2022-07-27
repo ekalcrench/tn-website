@@ -1,10 +1,12 @@
 @import url('./theme/fonts.scss');
+@import "./theme/_variables.scss";
 
 body {
   margin: 0;
   font-family: 'Lato-Regular', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: map-get($colors, font-color);
 }
 
 code {

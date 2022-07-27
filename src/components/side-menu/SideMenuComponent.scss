@@ -1,40 +1,44 @@
+@use "sass:math";
 @import url(../../theme/fonts.scss);
 @import "../../theme/_functions.scss";
 @import "../../theme/_variables.scss";
 
 @media (min-width: 1024px) {
   .side-menu {
-    position: sticky;
     left: 0;
     background-color: white;
-    width: vw(275);
-    height: 100vh;
-    box-shadow: 0 vw(15) vw(30) 0px rgb(0 0 0 / 16.1%);
+    width: vw(241);
+    height: calc(100vh - vw(88));
     text-align: center;
     div {
-      .dca-logo {
-        margin-top: vw(24);
-        margin-bottom: vw(40);
-        height: vw(45);
-        width: vw(184);
+      .tn-portal-maintenance {
+        margin-top: vw(20.1);
+        margin-bottom: vw(29.48);
+        height: vw(50.25);
+        width: vw(147.53);
       }
       .side-menu-list {
         display: flex;
         align-items: center;
         height: vw(37);
-        margin-bottom: vw(10);
-        margin-top: vw(10);
+        margin-bottom: vw(17);
         .list-icon {
           height: vw(16.31);
           width: vw(14.67);
           margin-right: vw(21.33);
           margin-left: vw(27);
         }
+        .list-icon-genset-monitoring{
+          height: vw(15.54);
+          width: vw(24.6);
+          margin-right: vw(16.37);
+          margin-left: vw(22.04);
+        }
         .list-text {
           font-family: "Lato-Bold";
           font-size: vw(15);
         }
-        .list-icon-setting {
+        .list-icon-genset {
           height: vw(18);
           width: vw(18);
         }
@@ -43,7 +47,11 @@
         cursor: pointer;
       }
       .side-menu-list-active{
-        background-color: map-get($colors, primary );
+        background-color: map-get($colors, tn-color );
+        color: white;
+      }
+      .side-menu-list-inactive:hover{
+        cursor: context-menu ;
       }
       .dropdown-none{
         display: none;
@@ -56,109 +64,131 @@
       }
     }
   }
-  .side-menu-fix-height{
-    height: 540px;
-  }
 }
 
 @media (min-width: 601px) and (max-width: 1024px) {
   .side-menu {
-    position: sticky;
     left: 0;
     background-color: white;
-    width: vw-tab(240);
-    height: 100vh;
-    /* X Y Blur (Spread) Color  */
-    box-shadow: vw-tab(5) 0px vw-tab(15) vw-tab(3) rgb(0 0 0 / 10%);
+    width: vw-tab(230);
+    height: calc(100vh - vw-tab(78));
     text-align: center;
-  }
-
-  .dca-logo {
-    margin-top: vw-tab(20);
-    margin-bottom: vw-tab(30);
-    height: vw-tab(38);
-    width: vw-tab(160);
-  }
-
-  .side-menu-list {
-    display: flex;
-    align-items: center;
-    height: vw-tab(35);
-    margin-bottom: vw-tab(10);
-    margin-top: vw-tab(10);
-  }
-
-  .side-menu-list:hover{
-    cursor: pointer;
-  }
-
-  .list-icon {
-    height: vw-tab(13);
-    width: vw-tab(12);
-    margin-right: vw-tab(14);
-    margin-left: vw-tab(27);
-  }
-
-  .list-icon-setting {
-    height: vw-tab(12);
-    width: vw-tab(12);
-  }
-
-  .list-text {
-    font-family: "Lato-Bold";
-    font-size: vw-tab(13);
-  }
-
-  .side-menu-fix-height{
-    height: 540px;
+    div {
+      .tn-portal-maintenance {
+        margin-top: vw-tab(19);
+        margin-bottom: vw-tab(25);
+        height: vw-tab(50.25);
+        width: vw-tab(147.53);
+      }
+      .side-menu-list {
+        display: flex;
+        align-items: center;
+        height: vw-tab(37);
+        margin-bottom: vw-tab(12);
+        .list-icon {
+          height: vw-tab(16.31);
+          width: vw-tab(14.67);
+          margin-right: vw-tab(18.33);
+          margin-left: vw-tab(25);
+        }
+        .list-icon-genset-monitoring{
+          height: vw-tab(15.54);
+          width: vw-tab(24.6);
+          margin-right: vw-tab(13.37);
+          margin-left: vw-tab(20.04);
+        }
+        .list-text {
+          font-family: "Lato-Bold";
+          font-size: vw-tab(15);
+        }
+        .list-icon-genset {
+          height: vw-tab(18);
+          width: vw-tab(18);
+        }
+      }
+      .side-menu-list:hover{
+        cursor: pointer;
+      }
+      .side-menu-list-active{
+        background-color: map-get($colors, tn-color );
+        color: white;
+      }
+      .side-menu-list-inactive:hover{
+        cursor: context-menu ;
+      }
+      .dropdown-none{
+        display: none;
+      }
+      .dropdown-block{
+        display: block;
+        .list-icon{
+          margin-left: vw-tab(37);
+        }
+      }
+    }
   }
 }
 
 @media (max-width: 601px) {
   .side-menu {
-    position: absolute;
-    top: vw-mobile(72);
+    margin-left: auto;
+    margin-right: auto;
     background-color: white;
-    height: vw-mobile(362);
-    width: 100%;
-    /* X Y Blur (Spread) Color  */
-    box-shadow: 0px vw-mobile(5) vw-mobile(15) vw-mobile(3) rgb(0 0 0 / 10%);
+    width: vw-mobile(270);
     text-align: center;
-  }
-
-  .dca-logo {
-    margin-top: vw-mobile(20);
-    margin-bottom: vw-mobile(20);
-    height: vw-mobile(47);
-    width: vw-mobile(200);
-  }
-
-  .side-menu-list {
-    display: flex;
-    align-items: center;
-    height: vw-mobile(35);
-    margin-bottom: vw-mobile(8);
-    margin-top: vw-mobile(8);
-  }
-
-  .side-menu-list:hover{
-    cursor: pointer;
-  }
-
-  .list-icon {
-    height: vw-mobile(19);
-    width: vw-mobile(17);
-    margin-right: vw-mobile(18);
-    margin-left: vw-mobile(203);
-  }
-
-  .list-icon-setting {
-    height: vw-mobile(17);
-    width: vw-mobile(17);
-  }
-
-  .list-text {
-    font-family: "Lato-Bold";
-    font-size: vw-mobile(17);
+    letter-spacing: vw-mobile(0.8);
+    div {
+      .tn-portal-maintenance {
+        margin-top: vw-mobile(19);
+        margin-bottom: vw-mobile(25);
+        height: vw-mobile(70);
+        width: vw-mobile(200);
+      }
+      .side-menu-list {
+        display: flex;
+        align-items: center;
+        height: vw-mobile(37);
+        margin-bottom: vw-mobile(12);
+        .list-icon {
+          height: vw-mobile(16.31);
+          width: vw-mobile(14.67);
+          margin-right: vw-mobile(18.33);
+          margin-left: vw-mobile(25);
+        }
+        .list-icon-genset-monitoring{
+          height: vw-mobile(15.54);
+          width: vw-mobile(24.6);
+          margin-right: vw-mobile(13.37);
+          margin-left: vw-mobile(20.04);
+        }
+        .list-text {
+          font-family: "Lato-Bold";
+          font-size: vw-mobile(15);
+        }
+        .list-icon-genset {
+          height: vw-mobile(18);
+          width: vw-mobile(18);
+        }
+      }
+      .side-menu-list:hover{
+        cursor: pointer;
+      }
+      .side-menu-list-active{
+        background-color: map-get($colors, tn-color );
+        color: white;
+      }
+      .side-menu-list-inactive:hover{
+        cursor: context-menu ;
+      }
+      .dropdown-none{
+        display: none;
+      }
+      .dropdown-block{
+        display: block;
+        .list-icon{
+          margin-left: vw-mobile(37);
+        }
+      }
+    }
   }
 }

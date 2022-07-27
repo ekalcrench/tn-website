@@ -1,5 +1,5 @@
 export const SET_CURRENT_COMPONENT = "SET_CURRENT_COMPONENT";
-export const SET_CURRENT_MENU = "SET_CURRENT_MENU";
+export const SET_JOB_EXECUTION_MENU = "SET_JOB_EXECUTION_MENU";
 
 export const setCurrentComponentAction = (data) => {
   return {
@@ -8,9 +8,8 @@ export const setCurrentComponentAction = (data) => {
   };
 };
 
-export const setCurrentMenuAction = (data) => {
+export const setJobExecutionAction = () => {
   return {
-    type: SET_CURRENT_MENU,
-    payload: data,
+    type: SET_JOB_EXECUTION_MENU,
   };
 };

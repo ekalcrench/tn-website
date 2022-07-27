@@ -1,13 +1,13 @@
 import {
   SET_CURRENT_COMPONENT,
-  SET_CURRENT_MENU,
+  SET_JOB_EXECUTION_MENU,
 } from "./SideMenuComponent.action";
 import { combineReducers } from "@reduxjs/toolkit";
-import { Component_Name, Side_Menu } from "../../common/constants";
+import { Component_Name } from "../../common/constants";
 
 const initialState = {
-  currentComponent: Component_Name.GENSET_DASHBOARD,
-  currentMenu: "",
+  currentComponent: Component_Name.GENSET_MONITORING,
+  jobExecutionMenu: false,
 };
 
 const SideMenuDataReducer = (state = initialState, action) => {
@@ -17,18 +17,11 @@ const SideMenuDataReducer = (state = initialState, action) => {
         ...state,
         currentComponent: action.payload,
       };
-    case SET_CURRENT_MENU:
-      if (state.currentMenu === action.payload) {
-        return {
-          ...state,
-          currentMenu: "",
-        };
-      } else {
-        return {
-          ...state,
-          currentMenu: action.payload,
-        };
-      }
+    case SET_JOB_EXECUTION_MENU:
+      return {
+        ...state,
+        jobExecutionMenu: !state.jobExecutionMenu,
+      };
     default:
       return state;
   }

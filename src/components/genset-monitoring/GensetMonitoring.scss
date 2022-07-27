@@ -2,9 +2,9 @@
 @import "../../theme/_functions.scss";
 
 @media (min-width: 1024px) {
-  .background {
+  .background-genset {
     background-color: map-get($colors, page-background);
-    height: calc(100vh - vw(88));
+    height: 100%;
     .container {
       display: block;
       width: 90%;
@@ -81,9 +81,6 @@
       font-size: vw(30);
       font-family: 'Lato-Bold';
     }
-  }
-  .fix-height {
-    height: calc(540px - vw(88));
   }
 }
 

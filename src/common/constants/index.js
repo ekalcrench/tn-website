@@ -3,13 +3,9 @@ export const Menu = {
 };
 
 export const Component_Name = {
-  GENSET_DATA: "GensetData",
-  GENSET_DASHBOARD: "GensetDashboard",
-};
-
-export const Side_Menu = {
-  GENSET_MONITORING: "GensetMonitoring",
-  FC_MONITORING: "FCMonitoring",
+  GENSET_MONITORING: "Genset Monitoring",
+  MASTER_CUSTOMER: "Master Customer",
+  LOCATION: "Location",
 };
 
 export const API = {
