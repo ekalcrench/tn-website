@@ -30,7 +30,7 @@
         margin-left: vw(10);
       }
     }
-    .add-customer {
+    .add-customer-button {
       height: vw(40);
       width: vw(145.66);
       margin-top: vw(24);
@@ -44,7 +44,7 @@
       font-size: vw(14);
       color: white;
     }
-    .add-customer:hover {
+    .add-customer-button:hover {
       cursor: pointer;
     }
     .table-filter {
@@ -215,20 +215,69 @@
           border-radius: vw(5);
           box-shadow: 0px vw(4) vw(4) 0px map-get($colors, shadow-color);
           display: flex;
-          align-items: center;
-          .entries{
-            width: 60%;
+          .multiple-entries {
+            display: block;
+            position: absolute;
+            margin-top: vw(-240);
+            border-radius: vw(20);
+            box-shadow: 0px vw(4) vw(4) 0px map-get($colors, shadow-color);
+            .entries {
+              display: flex;
+              align-items: center;
+              width: vw(40);
+              height: vw(40);
+              background-color: white;
+            }
+            .entries-active {
+              background-color: map-get($colors, tn-color);
+              color: white;
+            }
+            .entries-top {
+              border-top-left-radius: vw(5);
+              border-top-right-radius: vw(5);
+            }
+            .entries-bottom {
+              border-bottom-left-radius: vw(5);
+            }
+            .entries:hover {
+              cursor: pointer;
+              background-color: map-get($colors, tn-color);
+              color: white;
+            }
+          }
+          .multiple-entries:hover .entries-active {
+            background-color: white;
+            color: black;
+          }
+          .multiple-entries {
+            .entries-active:hover {
+              background-color: map-get($colors, tn-color);
+              color: white;
+            }
+          }
+          .entries {
+            width: vw(40);
             display: flex;
             justify-content: center;
+            align-items: center;
           }
           .dropdown-arrow {
             width: 40%;
             display: flex;
             justify-content: center;
+            align-items: center;
             .arrow-item {
               width: vw(10.92);
               height: vw(5.46);
             }
+          }
+          .dropdown-arrow:hover {
+            cursor: pointer;
+          }
+          .dropdown-show-entries {
+            margin-left: vw(40);
+            height: 100%;
+            align-items: center;
           }
         }
       }
@@ -244,6 +293,9 @@
           align-items: center;
           font-family: "Gotham-Regular";
         }
+        .page-item:hover {
+          cursor: pointer;
+        }
         .page-active {
           background-color: map-get($colors, tn-color);
           font-size: vw(13);
@@ -256,6 +308,84 @@
         .page-item-right {
           border-top-right-radius: vw(5);
           border-bottom-right-radius: vw(5);
+        }
+      }
+    }
+    .add-customer {
+      margin-top: vw(28);
+      .form {
+        background-color: white;
+        width: calc(vw(1613.44) - vw(26.43));
+        height: calc(vw(393.35) - vw(4));
+        padding-top: vw(4);
+        padding-left: vw(26.43);
+        .row {
+          display: flex;
+          margin-top: vw(32);
+          .form-input {
+            display: flex;
+            flex-wrap: wrap;
+            height: vw(55.09);
+            width: vw(250);
+            margin-right: vw(32);
+            .label {
+              font-family: "SFUIText-Bold";
+              font-size: vw(13);
+              opacity: 50%;
+              height: vw(16);
+              margin-left: vw(4);
+            }
+            .input {
+              border: none;
+              height: calc(vw(55.09) - vw(16));
+              border-bottom: vw(1) solid map-get($colors, form-border);
+              width: 100%;
+            }
+            .input::placeholder {
+              opacity: 50%;
+              font-family: "Lato-Reqular";
+              font-size: vw(14);
+              padding-left: vw(4);
+            }
+            .input:focus {
+              outline: none;
+              padding-left: vw(4);
+            }
+            .input[type="text"] {
+              padding: 0px;
+            }
+          }
+          .form-input-address {
+            width: vw(532);
+          }
+        }
+      }
+      .form-button {
+        display: flex;
+        justify-content: right;
+        margin-top: vw(24);
+        height: vw(40);
+        .button {
+          width: vw(144.38);
+          border-radius: vw(5);
+          font-family: "Lato-Bold";
+          font-size: vw(13);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .button:hover {
+          cursor: pointer;
+        }
+        .cancel {
+          border-style: solid;
+          border-width: vw(1);
+          border-color: map-get($colors, danger);
+          margin-right: vw(24);
+        }
+        .submit {
+          background-color: map-get($colors, tn-color);
+          color: white;
         }
       }
     }

@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { MasterCustomerReducer } from "../components/master-customer/MasterCustomer.reducer";
 import { SideMenuReducer } from "../components/side-menu/SideMenuComponent.reducer";
 import { LOGIN_ACTION, LOGOUT_ACTION } from "./App.action";
 
@@ -27,6 +28,7 @@ function userDataReducer(state = initialState, action) {
 const AppReducer = combineReducers({
   userData: userDataReducer,
   sideMenuComponent: SideMenuReducer,
+  masterCustomerComponent: MasterCustomerReducer,
 });
 
 export { AppReducer };
