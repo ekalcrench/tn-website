@@ -4,14 +4,27 @@ import {
   MASTER_CUSTOMER_DATA_SUCCESS,
   MASTER_CUSTOMER_DATA_FAILURE,
   SET_ENTRIES,
-  SHOW_ENTRIES,
+  SET_SHOW_ENTRIES,
   SET_CURRENT_PAGES,
   SET_TOTAL_PAGES,
-  SHOW_ADD_CUSTOMER,
-  SHOW_EDIT_CUSTOMER,
-  MASTER_CUSTOMER_POST_REQUEST,
-  MASTER_CUSTOMER_POST_SUCCESS,
-  MASTER_CUSTOMER_POST_FAILURE,
+  SET_SHOW_ADD_CUSTOMER,
+  SET_DATA_ADD_CUSTOMER,
+  SET_SHOW_EDIT_CUSTOMER,
+  SET_CAN_DATA_EDIT_CUSTOMER,
+  SET_DATA_EDIT_CUSTOMER,
+  SET_SHOW_CUSTOMER_NAME_FILTER,
+  SET_CUSTOMER_NAME_FILTER,
+  SET_SHOW_CITY_FILTER,
+  SET_CITY_FILTER,
+  SET_SEARCH_ALL_FILTER,
+  SET_CHECKED_DATA,
+  SET_SHOW_DELETE_FILTER,
+  RESET,
+  SET_SHOW_MODAL,
+  SET_MODAL_STATUS,
+  SET_MODAL_TEXT,
+  SET_MODAL_SUBMIT,
+  MODAL_RESET,
 } from "./MasterCustomer.action";
 
 const initialStateData = {
@@ -20,27 +33,27 @@ const initialStateData = {
   loading: false,
 };
 
-const initialStatePage = {
+export const initialStatePage = {
   showEntries: false,
   totalEntries: 5,
   currentPage: 1,
   totalPage: 1,
   showAddCustomer: false,
+  dataAddCustomer: null,
   showEditCustomer: false,
-};
-
-const initialStatePost = {
-  CustomerCode: "",
-  CustomerName: "",
-  Address: "",
-  City: "",
-  ZipCode: null,
-  Country: "",
-  ContactPersonName: "",
-  ContactPersonEmail: "",
-  PhoneNumber: "",
-  FaxNumber: null,
-  Remark: "",
+  canDataEditCustomer: false,
+  dataEditCustomer: null,
+  showCustomerNameFilter: false,
+  customerNameFilter: "",
+  showCityFilter: false,
+  cityFilter: "",
+  searchAllFilter: "",
+  checkedData: [],
+  showDeleteFilter: false,
+  showModal: false,
+  modalStatus: "",
+  modalText: "",
+  modalSubmit: false,
 };
 
 const MasterCustomerDataReducer = (state = initialStateData, action) => {
@@ -67,14 +80,14 @@ const MasterCustomerDataReducer = (state = initialStateData, action) => {
   }
 };
 
-const MasterCustomerPageReducer = (state = initialStatePage, action) => {
+export const MasterCustomerPageReducer = (state, action) => {
   switch (action.type) {
     case SET_ENTRIES:
       return {
         ...state,
         totalEntries: action.payload,
       };
-    case SHOW_ENTRIES:
+    case SET_SHOW_ENTRIES:
       return {
         ...state,
         showEntries: !state.showEntries,
@@ -89,27 +102,112 @@ const MasterCustomerPageReducer = (state = initialStatePage, action) => {
         ...state,
         totalPage: action.payload,
       };
-    case SHOW_ADD_CUSTOMER:
+    case SET_SHOW_ADD_CUSTOMER:
       return {
         ...state,
         showAddCustomer: !state.showAddCustomer,
       };
-    case SHOW_EDIT_CUSTOMER:
+    case SET_DATA_ADD_CUSTOMER:
       return {
         ...state,
-        showEditCustomer: !state.showEditCustomer,
+        dataAddCustomer: action.payload,
       };
-    default:
-      return state;
-  }
-};
-
-const MasterCustomerPostReducer = (state = initialStatePost, action) => {
-  switch (action.type) {
-    case MASTER_CUSTOMER_POST_REQUEST:
+    case SET_SHOW_EDIT_CUSTOMER:
       return {
         ...state,
-        Loading: true,
+        showEditCustomer: action.payload,
+      };
+    case SET_CAN_DATA_EDIT_CUSTOMER:
+      return {
+        ...state,
+        canDataEditCustomer: !state.canDataEditCustomer,
+      };
+    case SET_DATA_EDIT_CUSTOMER:
+      return {
+        ...state,
+        dataEditCustomer: action.payload,
+      };
+    case SET_SHOW_CUSTOMER_NAME_FILTER:
+      return {
+        ...state,
+        showCustomerNameFilter: !state.showCustomerNameFilter,
+      };
+    case SET_CUSTOMER_NAME_FILTER:
+      return {
+        ...state,
+        customerNameFilter: action.payload,
+      };
+    case SET_SHOW_CITY_FILTER:
+      return {
+        ...state,
+        showCityFilter: !state.showCityFilter,
+      };
+    case SET_CITY_FILTER:
+      return {
+        ...state,
+        cityFilter: action.payload,
+      };
+    case SET_SEARCH_ALL_FILTER:
+      return {
+        ...state,
+        searchAllFilter: action.payload,
+      };
+    case SET_CHECKED_DATA:
+      return {
+        ...state,
+        checkedData: action.payload,
+      };
+    case SET_SHOW_DELETE_FILTER:
+      return {
+        ...state,
+        showDeleteFilter: action.payload,
+      };
+    case RESET:
+      return {
+        ...state,
+        showEntries: false,
+        totalEntries: 5,
+        currentPage: 1,
+        showAddCustomer: false,
+        dataAddCustomer: null,
+        showEditCustomer: false,
+        canDataEditCustomer: false,
+        dataEditCustomer: null,
+        showCustomerNameFilter: false,
+        customerNameFilter: "",
+        showCityFilter: false,
+        cityFilter: "",
+        searchAllFilter: "",
+        checkedData: [],
+        showDeleteFilter: false,
+      };
+    case SET_SHOW_MODAL:
+      return {
+        ...state,
+        showModal: action.payload,
+      };
+    case SET_MODAL_STATUS:
+      return {
+        ...state,
+        modalStatus: action.payload,
+      };
+    case SET_MODAL_TEXT:
+      return {
+        ...state,
+        modalText: action.payload,
+      };
+    case SET_MODAL_SUBMIT:
+      return {
+        ...state,
+        modalSubmit: action.payload,
+      };
+    case MODAL_RESET:
+      return {
+        ...state,
+        showModal: false,
+        modalStatus: "",
+        modalText: "",
+        modalSubmit: false,
       };
     default:
       return state;
@@ -118,8 +216,6 @@ const MasterCustomerPostReducer = (state = initialStatePost, action) => {
 
 const MasterCustomerReducer = combineReducers({
   masterCustomerData: MasterCustomerDataReducer,
-  masterCustomerPage: MasterCustomerPageReducer,
-  masterCustomerPost: MasterCustomerPostReducer,
 });
 
 export { MasterCustomerReducer };

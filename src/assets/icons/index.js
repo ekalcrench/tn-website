@@ -10,6 +10,7 @@ import Broken from "./broken.png";
 import CheckedGood from "./checked-good.png";
 import CheckedBad from "./checked-bad.png";
 import CalendarIcon from "./ic_calendar.png";
+import CloseModalButton from "./close-modal-button.png";
 import ConditionGood from "./condition-good.png";
 import ConditionGoodWhite from "./condition-good-white.png";
 import ConditionBad from "./condition-bad.png";
@@ -32,6 +33,7 @@ import IconFilter from "./filter.png";
 import IconGensetMonitoring from "./ic_genset_monitoring.png";
 import IconGensetMonitoringActive from "./ic_genset_monitoring-active.png";
 import IconSort from "./sort.png";
+import IconTrash from "./ic_trash.png";
 import JobAssignmentNow from "./job-assignment-now.png";
 import JobAssignmentTimeLine from "./job-assignment.png";
 import KeyboardArrowUp from "./keyboard-arrow-up.png";
@@ -194,4 +196,6 @@ export {
   IconGensetMonitoringActive,
   DropdownIconWhite,
   ZoomIconWhite,
+  IconTrash,
+  CloseModalButton,
 };

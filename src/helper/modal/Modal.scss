@@ -1,0 +1,69 @@
+@import url(../../theme/fonts.scss);
+@import "../../theme/_variables.scss";
+@import "../../theme/_functions.scss";
+
+.background-modal {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background-color: map-get($colors, modal-background);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: map-get($colors, font-color);
+  .container {
+    background-color: white;
+    height: vw(227.85);
+    width: vw(441.76);
+    .modal-header {
+      margin-top: vw(20);
+      display: flex;
+      justify-content: right;
+      .close-button {
+        margin-right: vw(20);
+        width: vw(20);
+        height: vw(20);
+      }
+      .close-button:hover{
+        cursor: pointer;
+      }
+    }
+    .modal-body {
+      margin-top: vw(30.23);
+      font-family: "SFUIText-Regular";
+      font-size: vw(14);
+      display: flex;
+      justify-content: center;
+      text-align: center;
+    }
+    .modal-footer {
+      display: flex;
+      justify-content: center;
+      margin-top: vw(34.54);
+      .button {
+        height: vw(40);
+        width: vw(144.38);
+        border-radius: vw(5);
+        font-family: "Lato-Bold";
+        font-size: vw(13);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .button:hover{
+        cursor: pointer;
+      }
+      .cancel-button {
+        background: none;
+        border: vw(1) solid map-get($colors, danger);
+        margin-right: vw(24);
+      }
+      .submit-button {
+        background-color: map-get($colors, tn-color);
+        color: white;
+      }
+    }
+  }
+}

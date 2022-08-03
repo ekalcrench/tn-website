@@ -16,7 +16,7 @@ export const ADD_CUSTOMER_FORM = {
   ZIP_CODE: "ZIP CODE",
   COUNTRY: "COUNTRY",
   CONTACT_PERSON_NAME: "CONTACT PERSON NAME",
-  CONTACT_PERSON_EMAIL: "CONTACT_PERSON_EMAIL",
+  CONTACT_PERSON_EMAIL: "CONTACT PERSON EMAIL",
   PHONE_NUMBER: "PHONE NUMBER",
   FAX_NUMBER: "FAX NUMBER",
   REMARK: "REMARK",
@@ -24,6 +24,9 @@ export const ADD_CUSTOMER_FORM = {
 
 export const API = {
   MASTER_CUSTOMER: "http://localhost:3003/MasterCustomer",
+  CUSTOMER: "https://localhost:7261/api/Customer", 
+  CUSTOMER_ALL: "https://localhost:7261/api/Customer/all",
+  CUSTOMER_FILTER: "https://localhost:7261/api/Customer/filter",
   GENSET_DASHBOARD:
     "https://localhost:7261/api/Genset?EquipmentId=f51cdfa2-a524-466b-8607-5cd3b0b3cf29",
 };

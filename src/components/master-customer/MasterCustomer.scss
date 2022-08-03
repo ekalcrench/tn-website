@@ -55,7 +55,6 @@
         width: vw(203.22);
         height: vw(40);
         box-shadow: 0px vw(4) vw(4) 0px map-get($colors, shadow-color);
-        border-radius: vw(5);
         margin-right: vw(27.78);
         .table-filter-item-title {
           background-color: white;
@@ -66,6 +65,8 @@
           padding-left: vw(18.98);
           font-size: vw(14);
           font-family: "Lato-Medium";
+          border-bottom-left-radius: vw(5);
+          border-top-left-radius: vw(5);
         }
         .dropdown-icon {
           background-color: map-get($colors, tn-color);
@@ -74,6 +75,8 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          border-bottom-right-radius: vw(5);
+          border-top-right-radius: vw(5);
           .dropdown-icon-item {
             width: vw(10.92);
             height: vw(5.46);
@@ -82,26 +85,89 @@
         .dropdown-icon:hover {
           cursor: pointer;
         }
+        .filter-input {
+          display: block;
+          position: absolute;
+          width: calc(vw(157) + vw(46.22) - vw(12));
+          height: vw(40);
+          margin-top: vw(40);
+          background-color: white;
+          .input {
+            width: 100%;
+            height: 100%;
+            padding: 0px;
+            margin: 0px;
+            border: none;
+            border-radius: vw(5);
+            padding-left: vw(12);
+            font-family: "Lato-Medium";
+            font-size: vw(14);
+          }
+          .input::placeholder {
+            opacity: 50%;
+          }
+          .input:focus {
+            outline: none;
+          }
+        }
+      }
+      .delete-customer {
+        margin-left: calc(vw(532.63) - vw(27.78));
+        width: vw(168.5);
+        height: vw(40);
+        background-color: map-get($colors, danger);
+        border-radius: vw(5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        .icon-trash {
+          width: vw(17);
+          height: vw(17);
+        }
+        .text {
+          font-family: "Lato-Bold";
+          font-size: vw(14);
+          margin-left: vw(5.32);
+        }
+      }
+      .delete-customer:hover {
+        cursor: pointer;
       }
       .table-filter-search {
-        margin-left: vw(716.96);
+        margin-left: vw(43.62);
         margin-right: vw(16);
         display: flex;
         align-items: center;
+        justify-content: space-between;
         width: vw(342.95);
         height: vw(40);
         box-shadow: 0px vw(4) vw(4) 0px map-get($colors, shadow-color);
         background-color: white;
         border-radius: vw(5);
-        .table-filter-search-title {
-          color: map-get($colors, placeholder);
-          margin-left: vw(23.47);
-          font-size: vw(16);
+        .filter-input {
+          height: 100%;
+          width: vw(270);
+          .input {
+            height: 100%;
+            width: 100%;
+            padding: 0px;
+            margin: 0px;
+            margin-left: vw(23.47);
+            border: none;
+            font-size: vw(16);
+          }
+          .input:focus {
+            outline: none;
+          }
+          .input::placeholder {
+            color: map-get($colors, placeholder);
+          }
         }
         .search-icon {
-          margin-left: vw(234.44);
           width: vw(29.79);
           height: vw(29.79);
+          margin-right: vw(7.24);
           background-color: map-get($colors, tn-color);
           border-radius: vw(5);
           display: flex;
@@ -115,6 +181,9 @@
         .search-icon:hover {
           cursor: pointer;
         }
+      }
+      .table-filter-search-margin {
+        margin-left: calc(vw(744.75) - vw(27.78));
       }
       .table-filter-reset {
         background-color: map-get($colors, tn-color);
@@ -182,20 +251,37 @@
         }
         .customer-code {
           width: calc(vw(249.5) + vw(97));
+          height: 100%;
+          display: flex;
+          align-items: center;
           font-size: vw(14);
         }
         .customer-name {
           width: calc(vw(295.98) + vw(101));
+          height: 100%;
+          display: flex;
+          align-items: center;
           font-size: vw(14);
         }
         .address {
           width: calc(vw(444.52) + vw(51));
+          height: 100%;
+          display: flex;
+          align-items: center;
           font-size: vw(15);
         }
         .city {
           width: calc(vw(26) + vw(264.51));
+          height: 100%;
+          display: flex;
+          align-items: center;
           font-size: vw(15);
         }
+      }
+      .table-list:hover {
+        cursor: pointer;
+        background-color: map-get($colors, tn-color);
+        color: white;
       }
     }
     .pagination {
@@ -319,6 +405,21 @@
         height: calc(vw(393.35) - vw(4));
         padding-top: vw(4);
         padding-left: vw(26.43);
+        .edit-customer-button{
+          position: absolute;
+          width: vw(144.38);
+          height: vw(40);
+          background-color: map-get($colors, tn-color);
+          border-radius: vw(5);
+          color: white;
+          display: flex;
+          font-family: 'Lato-Bold';
+          font-size: vw(13);
+          justify-content: center;
+          align-items: center;
+          margin-left: calc(vw(1445.06) - vw(26.43));
+          margin-top: vw(24);
+        }
         .row {
           display: flex;
           margin-top: vw(32);
@@ -337,22 +438,20 @@
             }
             .input {
               border: none;
-              height: calc(vw(55.09) - vw(16));
+              height: calc(vw(55.09) - vw(16) - vw(4));
               border-bottom: vw(1) solid map-get($colors, form-border);
               width: 100%;
+              font-family: "Lato-Reqular";
+              font-size: vw(18);
+              padding: 0px;
+              padding-left: vw(4);
             }
             .input::placeholder {
               opacity: 50%;
-              font-family: "Lato-Reqular";
               font-size: vw(14);
-              padding-left: vw(4);
             }
             .input:focus {
               outline: none;
-              padding-left: vw(4);
-            }
-            .input[type="text"] {
-              padding: 0px;
             }
           }
           .form-input-address {
