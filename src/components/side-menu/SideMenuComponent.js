@@ -130,6 +130,28 @@ export default function SideMenuComponent(props) {
           />
           <div className="list-text">{Component_Name.MASTER_CUSTOMER}</div>
         </div>
+        {/* Master Equipment */}
+        <div
+          className={
+            props.sideMenu.currentComponent === Component_Name.MASTER_EQUIPMENT
+              ? "side-menu-list side-menu-list-active"
+              : "side-menu-list"
+          }
+          onClick={() =>
+            props.setCurrentComponent(Component_Name.MASTER_EQUIPMENT)
+          }
+        >
+          <img
+            src={
+              props.sideMenu.currentComponent === Component_Name.MASTER_EQUIPMENT
+                ? AssignmentIconActive
+                : AssignmentIcon
+            }
+            alt="assignment-icon"
+            className="list-icon"
+          />
+          <div className="list-text">{Component_Name.MASTER_EQUIPMENT}</div>
+        </div>
       </div>
     </div>
   );

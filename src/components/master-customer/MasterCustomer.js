@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useReducer, useState } from "react";
+import React, { useEffect, useLayoutEffect, useReducer } from "react";
 import "./MasterCustomer.scss";
 import {
   DropdownIconWhite,
@@ -21,7 +21,6 @@ import {
   setShowEntries,
   setEntries,
   setCurrentPage,
-  setTotalPages,
   setCheckedData,
   setShowDeleteFilter,
   setShowAddCustomer,
@@ -49,38 +48,51 @@ export default function MasterCustomer(props) {
   );
 
   useLayoutEffect(() => {
-    props.getMasterCustomerData();
+    props.getMasterCustomerData(
+      dispatch,
+      state.currentPage,
+      state.totalEntries
+    );
   }, []);
 
   useEffect(() => {
     if (props.masterCustomerData.data !== null) {
-      const totalPages = Math.ceil(
-        props.masterCustomerData.data.length / state.totalEntries
+      setCheckedData(
+        dispatch,
+        new Array(props.masterCustomerData.data.length).fill(false)
       );
-      setTotalPages(dispatch, totalPages);
-      if (state.checkedData.length <= 0) {
-        setCheckedData(
-          dispatch,
-          new Array(props.masterCustomerData.data.length).fill(false)
+    }
+  }, [props.masterCustomerData.data]);
+
+  useEffect(() => {
+    if (props.masterCustomerData.data !== null) {
+      props.getMasterCustomerData(
+        dispatch,
+        state.currentPage,
+        state.totalEntries
+      );
+    }
+  }, [state.currentPage, state.totalEntries]);
+
+  useEffect(() => {
+    if (props.masterCustomerData.data !== null) {
+      if (state.customerNameFilter.length > 0 && state.cityFilter.length > 0) {
+        const data = [state.cityFilter, state.customerNameFilter];
+        const status = ["City", "CustomerName"];
+        console.log(data, status);
+        props.getFilterMasterCustomerData(data, status);
+      } else if (state.customerNameFilter.length > 0) {
+        console.log(state.customerNameFilter, "CustomerName");
+        props.getFilterMasterCustomerData(
+          state.customerNameFilter,
+          "CustomerName"
         );
+      } else if (state.cityFilter.length > 0) {
+        console.log(state.cityFilter, "City");
+        props.getFilterMasterCustomerData(state.cityFilter, "City");
       }
     }
-  }, [props.masterCustomerData.data, state.totalEntries]);
-
-  useEffect(() => {
-    if (props.masterCustomerData.data !== null) {
-      props.getFilterMasterCustomerData(
-        state.customerNameFilter,
-        "CustomerName"
-      );
-    }
-  }, [state.customerNameFilter]);
-
-  useEffect(() => {
-    if (props.masterCustomerData.data !== null) {
-      props.getFilterMasterCustomerData(state.cityFilter, "City");
-    }
-  }, [state.cityFilter]);
+  }, [state.customerNameFilter, state.cityFilter]);
 
   useEffect(() => {
     const filter = state.checkedData.filter((data) => data === true);
@@ -104,10 +116,18 @@ export default function MasterCustomer(props) {
         handleDeleteData();
       } else if (state.modalStatus === "post") {
         postMasterCustomerData(state.dataAddCustomer);
-        props.getMasterCustomerData();
+        props.getMasterCustomerData(
+          dispatch,
+          state.currentPage,
+          state.totalEntries
+        );
       } else if (state.modalStatus === "put") {
         putMasterCustomerData(state.dataEditCustomer);
-        props.getMasterCustomerData();
+        props.getMasterCustomerData(
+          dispatch,
+          state.currentPage,
+          state.totalEntries
+        );
       }
       modalReset(dispatch);
       reset(dispatch);
@@ -120,6 +140,8 @@ export default function MasterCustomer(props) {
   };
 
   const handleCheckedData = (position) => {
+    console.log(position);
+    console.log(props.masterCustomerData.data[position]);
     setCheckedData(
       dispatch,
       state.checkedData.map((data, index) =>
@@ -134,7 +156,11 @@ export default function MasterCustomer(props) {
         deleteMasterCustomerData(props.masterCustomerData.data[index].custCode);
       }
     });
-    props.getMasterCustomerData();
+    props.getMasterCustomerData(
+      dispatch,
+      state.currentPage,
+      state.totalEntries
+    );
   };
 
   const handleSubmitData = (data) => {
@@ -143,7 +169,7 @@ export default function MasterCustomer(props) {
   };
 
   const handleEditData = (data) => {
-    handleModal(true, "put", "Are you sure you want to submit new customer?");
+    handleModal(true, "put", "Are you sure you want to change the customer?");
     setDataEditCustomer(dispatch, data);
   };
 
@@ -158,16 +184,30 @@ export default function MasterCustomer(props) {
     setModalText(dispatch, modalText);
   };
 
-  const renderAddCustomer = () => {
+  const renderForm = (data) => {
     return (
       <div className="add-customer">
         <Formik
-          initialValues={initialFormState}
+          initialValues={
+            data && Object.keys(data).length > 0 ? data : initialFormState
+          }
           validate={validate}
-          onSubmit={handleSubmitData}
+          onSubmit={
+            data && Object.keys(data).length > 0
+              ? handleEditData
+              : handleSubmitData
+          }
         >
           <Form>
             <div className="form">
+              {data && Object.keys(data).length > 0 && (
+                <div
+                  className="edit-customer-button"
+                  onClick={() => setCanDataEditCustomer(dispatch)}
+                >
+                  Edit
+                </div>
+              )}
               <div className="row">
                 <div className="form-input">
                   <div className="label">{ADD_CUSTOMER_FORM.CUSTOMER_CODE}</div>
@@ -176,6 +216,13 @@ export default function MasterCustomer(props) {
                     placeholder="Input Customer Code..."
                     type="text"
                     name="custCode"
+                    disabled={
+                      state.canDataEditCustomer
+                        ? false
+                        : data && Object.keys(data).length > 0
+                        ? true
+                        : false
+                    }
                   />
                   <ErrorMessage name="custCode" />
                 </div>
@@ -294,164 +341,11 @@ export default function MasterCustomer(props) {
             <div className="form-button">
               <div
                 className="button cancel"
-                onClick={() => setShowAddCustomer(dispatch)}
-              >
-                Cancel
-              </div>
-              <button className="button submit" type="submit">
-                Submit
-              </button>
-            </div>
-          </Form>
-        </Formik>
-      </div>
-    );
-  };
-
-  const renderEditCustomer = (data) => {
-    return (
-      <div className="add-customer">
-        <Formik
-          initialValues={data}
-          validate={validate}
-          onSubmit={handleEditData}
-        >
-          <Form>
-            <div className="form">
-              <div
-                className="edit-customer-button"
-                onClick={() => setCanDataEditCustomer(dispatch)}
-              >
-                Edit
-              </div>
-              <div className="row">
-                <div className="form-input">
-                  <div className="label">{ADD_CUSTOMER_FORM.CUSTOMER_CODE}</div>
-                  <Field
-                    className="input"
-                    placeholder="Input Customer Code..."
-                    type="text"
-                    name="custCode"
-                    disabled="disabled"
-                  />
-                  <ErrorMessage name="custCode" />
-                </div>
-                <div className="form-input">
-                  <div className="label">{ADD_CUSTOMER_FORM.CUSTOMER_NAME}</div>
-                  <Field
-                    className="input"
-                    placeholder="Input Customer Name..."
-                    type="text"
-                    name="customerName"
-                  />
-                  <ErrorMessage name="customerName" />
-                </div>
-              </div>
-              <div className="row">
-                <div className="form-input form-input-address">
-                  <div className="label">{ADD_CUSTOMER_FORM.ADDRESS}</div>
-                  <Field
-                    className="input"
-                    placeholder="Input Address..."
-                    type="text"
-                    name="address"
-                  />
-                  <ErrorMessage name="address" />
-                </div>
-                <div className="form-input">
-                  <div className="label">{ADD_CUSTOMER_FORM.CITY}</div>
-                  <Field
-                    className="input"
-                    placeholder="Input City"
-                    type="text"
-                    name="city"
-                  />
-                  <ErrorMessage name="city" />
-                </div>
-                <div className="form-input">
-                  <div className="label">{ADD_CUSTOMER_FORM.ZIP_CODE}</div>
-                  <Field
-                    className="input"
-                    placeholder="Input Zip Code"
-                    type="text"
-                    name="zipCode"
-                  />
-                  <ErrorMessage name="zipCode" />
-                </div>
-                <div className="form-input">
-                  <div className="label">{ADD_CUSTOMER_FORM.COUNTRY}</div>
-                  <Field
-                    className="input"
-                    placeholder="Input Country"
-                    type="text"
-                    name="country"
-                  />
-                  <ErrorMessage name="country" />
-                </div>
-              </div>
-              <div className="row">
-                <div className="form-input">
-                  <div className="label">
-                    {ADD_CUSTOMER_FORM.CONTACT_PERSON_NAME}
-                  </div>
-                  <Field
-                    className="input"
-                    placeholder="Input Contact Person Name..."
-                    type="text"
-                    name="cpName"
-                  />
-                  <ErrorMessage name="cpName" />
-                </div>
-                <div className="form-input">
-                  <div className="label">
-                    {ADD_CUSTOMER_FORM.CONTACT_PERSON_EMAIL}
-                  </div>
-                  <Field
-                    className="input"
-                    placeholder="Input Contact Person Email..."
-                    type="text"
-                    name="cpEmail"
-                  />
-                  <ErrorMessage name="cpEmail" />
-                </div>
-                <div className="form-input">
-                  <div className="label">{ADD_CUSTOMER_FORM.PHONE_NUMBER}</div>
-                  <Field
-                    className="input"
-                    placeholder="Input Phone Number..."
-                    type="text"
-                    name="phoneNumber"
-                  />
-                  <ErrorMessage name="phoneNumber" />
-                </div>
-                <div className="form-input">
-                  <div className="label">{ADD_CUSTOMER_FORM.FAX_NUMBER}</div>
-                  <Field
-                    className="input"
-                    placeholder="Input Fax Number..."
-                    type="text"
-                    name="fax"
-                  />
-                  <ErrorMessage name="fax" />
-                </div>
-              </div>
-              <div className="row">
-                <div className="form-input">
-                  <div className="label">{ADD_CUSTOMER_FORM.REMARK}</div>
-                  <Field
-                    className="input"
-                    placeholder="Input Remark"
-                    type="text"
-                    name="remark"
-                  />
-                  <ErrorMessage name="remark" />
-                </div>
-              </div>
-            </div>
-            <div className="form-button">
-              <div
-                className="button cancel"
-                onClick={() => handleCloseEditData()}
+                onClick={() =>
+                  data && Object.keys(data).length > 0
+                    ? handleCloseEditData()
+                    : setShowAddCustomer(dispatch)
+                }
               >
                 Cancel
               </div>
@@ -755,9 +649,9 @@ export default function MasterCustomer(props) {
           </div>
         </div>
         {state.showAddCustomer ? (
-          renderAddCustomer()
+          renderForm()
         ) : state.showEditCustomer ? (
-          renderEditCustomer(state.dataEditCustomer)
+          renderForm(state.dataEditCustomer)
         ) : (
           <div>
             <div
@@ -775,19 +669,8 @@ export default function MasterCustomer(props) {
                 <div className="city">City</div>
               </div>
               <div className="table-body">
-                {Array.from(Array(state.totalEntries), (_e, i) => {
-                  const index =
-                    i + (state.currentPage - 1) * state.totalEntries;
-                  return (
-                    <div key={index}>
-                      {props.masterCustomerData.data &&
-                        props.masterCustomerData.data[index] &&
-                        renderTable(
-                          props.masterCustomerData.data[index],
-                          index
-                        )}
-                    </div>
-                  );
+                {props.masterCustomerData.data?.map((data, index) => {
+                  return <div key={index}>{renderTable(data, index)}</div>;
                 })}
               </div>
               {renderPagination()}

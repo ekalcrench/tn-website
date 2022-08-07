@@ -2,7 +2,7 @@ import React from "react";
 import { GensetMonitoring } from "../../components/genset-monitoring";
 import { Component_Name } from "../../common/constants";
 import { MasterCustomer } from "../../components/master-customer";
-import { Location } from "../../components/location";
+import { MasterEquipment } from "../../components/master-equipment";
 
 function Home(props) {
   return (
@@ -12,6 +12,9 @@ function Home(props) {
       )}
       {props.sideMenu.currentComponent === Component_Name.MASTER_CUSTOMER && (
         <MasterCustomer />
+      )}
+      {props.sideMenu.currentComponent === Component_Name.MASTER_EQUIPMENT && (
+        <MasterEquipment />
       )}
     </div>
   );

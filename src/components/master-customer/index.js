@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getMasterCustomerData: () => dispatch(getMasterCustomerDataAction()),
+    getMasterCustomerData: (dispatchUseReducer, currentPage, totalEntries) => dispatch(getMasterCustomerDataAction(dispatchUseReducer, currentPage, totalEntries)),
     getFilterMasterCustomerData: (data, status) => dispatch(getFilterMasterCustomerDataAction(data, status)),
   };
 };

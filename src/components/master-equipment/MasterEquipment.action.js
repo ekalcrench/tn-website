@@ -1,18 +1,14 @@
 import axios from "axios";
 import { API } from "../../common/constants";
 
-export const MASTER_CUSTOMER_DATA_REQUEST = "MASTER_CUSTOMER_DATA_REQUEST";
-export const MASTER_CUSTOMER_DATA_SUCCESS = "MASTER_CUSTOMER_DATA_SUCCESS";
-export const MASTER_CUSTOMER_DATA_FAILURE = "MASTER_CUSTOMER_DATA_FAILURE";
-
-export const MASTER_CUSTOMER_POST_REQUEST = "MASTER_CUSTOMER_POST_REQUEST";
-export const MASTER_CUSTOMER_POST_SUCCESS = "MASTER_CUSTOMER_POST_SUCCESS";
-export const MASTER_CUSTOMER_POST_FAILURE = "MASTER_CUSTOMER_POST_FAILURE";
+export const MASTER_EQUIPMENT_DATA_REQUEST = "MASTER_EQUIPMENT_DATA_REQUEST";
+export const MASTER_EQUIPMENT_DATA_FAILURE = "MASTER_EQUIPMENT_DATA_FAILURE";
+export const MASTER_EQUIPMENT_GET_SUCCESS = "MASTER_EQUIPMENT_GET_SUCCESS";
 
 export const SET_ENTRIES = "SET_ENTRIES";
 export const SET_SHOW_ENTRIES = "SET_SHOW_ENTRIES";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
-export const SET_TOTAL_PAGES = "SET_TOTAL_PAGES"
+export const SET_TOTAL_PAGES = "SET_TOTAL_PAGES";
 export const SET_SHOW_ADD_CUSTOMER = "SET_SHOW_ADD_CUSTOMER";
 export const SET_DATA_ADD_CUSTOMER = "SET_DATA_ADD_CUSTOMER";
 export const SET_SHOW_EDIT_CUSTOMER = "SET_SHOW_EDIT_CUSTOMER";
@@ -36,58 +32,51 @@ export const SET_MODAL_SUBMIT = "SET_MODAL_SUBMIT";
 
 export const MODAL_RESET = "MODAL_RESET";
 
-export const masterCustomerDataRequest = () => {
-  return {
-    type: MASTER_CUSTOMER_DATA_REQUEST,
-  };
-};
-
-export const masterCustomerDataSuccess = (data) => {
-  return {
-    type: MASTER_CUSTOMER_DATA_SUCCESS,
-    payload: data,
-  };
-};
-
-export const masterCustomerDataFailure = (data) => {
-  return {
-    type: MASTER_CUSTOMER_DATA_FAILURE,
-    payload: data,
-  };
-};
-
-export const getMasterCustomerDataAction = (dispatchUseReducer, currentPage, totalEntries) => {
-  return (dispatch) => {
-    console.log("masterCustomerDataRequest");
-    dispatch(masterCustomerDataRequest());
-    axios
-      .get(API.CUSTOMER_PAGGING + "Page=" + currentPage + "&PageSize=" + totalEntries)
-      .then((response) => {
-        dispatch(masterCustomerDataSuccess(response.data.data));
-        setTotalPage(dispatchUseReducer, response.data.totalPageCount)
-      })
-      .catch((err) => {
-        console.log(err.message);
-        dispatch(masterCustomerDataFailure(err.message));
-      });
-  };
+export const getMasterEquipmentData = (dispatch, currentPage, totalEntries) => {
+  console.log("masterCustomerDataRequest");
+  masterEquipmentDataRequest(dispatch);
+  // axios
+  //   .get(
+  //     API.CUSTOMER_PAGGING + "Page=" + currentPage + "&PageSize=" + totalEntries
+  //   )
+  //   .then((response) => {
+  //     masterEquipmentGetSuccess(dispatch, response.data.data);
+  //     setTotalPage(dispatch, response.data.totalPageCount);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err.message);
+  //     masterEquipmentDataFailure(dispatch, err.message);
+  //   });
+  axios
+    .get(API.MASTER_EQUIPMENT)
+    .then((response) => {
+      console.log(response.data)
+      masterEquipmentGetSuccess(dispatch, response.data);
+      setTotalPage(dispatch, 1);
+    })
+    .catch((err) => {
+      console.log(err.message);
+      masterEquipmentDataFailure(dispatch, err.message);
+    });
 };
 
 export const getFilterMasterCustomerDataAction = (data, status) => {
   return (dispatch) => {
-    console.log(data, status)
+    console.log(data, status);
     if (data.length > 4) {
-      console.log(data, status)
+      console.log(data, status);
+      masterEquipmentDataRequest(dispatch);
       axios
         .get(API.CUSTOMER_FILTER + status + "=" + data)
         .then((response) => {
           console.log(response.data);
-          dispatch(masterCustomerDataSuccess(response.data));
+          masterEquipmentGetSuccess(dispatch, response.data);
         })
         .catch((err) => {
           console.log(err.message);
         });
     } else if (status.length === 2) {
+      masterEquipmentDataRequest(dispatch);
       axios
         .get(
           API.CUSTOMER_FILTER +
@@ -101,10 +90,11 @@ export const getFilterMasterCustomerDataAction = (data, status) => {
         )
         .then((response) => {
           console.log(response.data);
-          dispatch(masterCustomerDataSuccess(response.data));
+          masterEquipmentGetSuccess(dispatch, response.data);
         })
         .catch((err) => {
           console.log(err.message);
+          masterEquipmentDataFailure(dispatch, err.message);
         });
     }
   };
@@ -146,6 +136,26 @@ export const putMasterCustomerData = (data) => {
     });
 };
 
+export const masterEquipmentDataRequest = (dispatch) => {
+  dispatch({
+    type: MASTER_EQUIPMENT_DATA_REQUEST,
+  });
+};
+
+export const masterEquipmentDataFailure = (dispatch, data) => {
+  dispatch({
+    type: MASTER_EQUIPMENT_DATA_FAILURE,
+    payload: data,
+  });
+};
+
+export const masterEquipmentGetSuccess = (dispatch, data) => {
+  dispatch({
+    type: MASTER_EQUIPMENT_GET_SUCCESS,
+    payload: data,
+  });
+};
+
 export const setEntries = (dispatch, data) => {
   dispatch({
     type: SET_ENTRIES,
@@ -169,9 +179,9 @@ export const setCurrentPage = (dispatch, data) => {
 export const setTotalPage = (dispatch, data) => {
   dispatch({
     type: SET_TOTAL_PAGES,
-    payload: data
-  })
-}
+    payload: data,
+  });
+};
 
 export const setShowAddCustomer = (dispatch) => {
   dispatch({
@@ -200,6 +210,7 @@ export const setCanDataEditCustomer = (dispatch) => {
 };
 
 export const setDataEditCustomer = (dispatch, data) => {
+  console.log("sini")
   dispatch({
     type: SET_DATA_EDIT_CUSTOMER,
     payload: data,

@@ -12,23 +12,6 @@ export const initialFormState = {
   remark: "",
 };
 
-export const initialEditFormState = (data) => {
-  const formState = {
-    custCode: "",
-    customerName: "",
-    address: "",
-    city: "",
-    zipCode: "",
-    country: "",
-    cpName: "",
-    cpEmail: "",
-    phoneNumber: "",
-    fax: "",
-    remark: "",
-  };
-  return formState;
-};
-
 export const validate = (values) => {
   //   console.log(values);
   let errors = {};

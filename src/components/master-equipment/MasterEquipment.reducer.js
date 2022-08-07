@@ -1,17 +1,17 @@
-import { combineReducers } from "@reduxjs/toolkit";
 import {
-  MASTER_CUSTOMER_DATA_REQUEST,
-  MASTER_CUSTOMER_DATA_SUCCESS,
-  MASTER_CUSTOMER_DATA_FAILURE,
+  MASTER_EQUIPMENT_DATA_REQUEST,
+  MASTER_EQUIPMENT_DATA_FAILURE,
+  MASTER_EQUIPMENT_GET_SUCCESS,
+  SET_DATA_ADD_CUSTOMER,
+  SET_DATA_EDIT_CUSTOMER,
+
   SET_ENTRIES,
   SET_SHOW_ENTRIES,
   SET_CURRENT_PAGE,
   SET_TOTAL_PAGES,
   SET_SHOW_ADD_CUSTOMER,
-  SET_DATA_ADD_CUSTOMER,
   SET_SHOW_EDIT_CUSTOMER,
   SET_CAN_DATA_EDIT_CUSTOMER,
-  SET_DATA_EDIT_CUSTOMER,
   SET_SHOW_CUSTOMER_NAME_FILTER,
   SET_CUSTOMER_NAME_FILTER,
   SET_SHOW_CITY_FILTER,
@@ -20,15 +20,22 @@ import {
   SET_CHECKED_DATA,
   SET_SHOW_DELETE_FILTER,
   RESET,
+
   SET_SHOW_MODAL,
   SET_MODAL_STATUS,
   SET_MODAL_TEXT,
   SET_MODAL_SUBMIT,
   MODAL_RESET,
-} from "./MasterCustomer.action";
+} from "./MasterEquipment.action";
 
-const initialStateData = {
-  data: null,
+export const initialStateData = {
+  dataGet: null,
+  dataPost: null,
+  dataEdit: null,
+  dataAdd: null,
+  customerNameFilter: "",
+  cityFilter: "",
+  searchAllFilter: "",
   error: null,
   loading: false,
 };
@@ -39,48 +46,59 @@ export const initialStatePage = {
   currentPage: 1,
   totalPage: 1,
   showAddCustomer: false,
-  dataAddCustomer: null,
   showEditCustomer: false,
   canDataEditCustomer: false,
-  dataEditCustomer: null,
   showCustomerNameFilter: false,
-  customerNameFilter: "",
   showCityFilter: false,
-  cityFilter: "",
-  searchAllFilter: "",
   checkedData: [],
   showDeleteFilter: false,
+};
+
+export const initialStateModal = {
   showModal: false,
   modalStatus: "",
   modalText: "",
   modalSubmit: false,
 };
 
-const MasterCustomerDataReducer = (state = initialStateData, action) => {
+export const MasterEquipmentDataReducer = (state, action) => {
+  console.log("MasterEquipmentDataReducer");
   switch (action.type) {
-    case MASTER_CUSTOMER_DATA_REQUEST:
+    case MASTER_EQUIPMENT_DATA_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case MASTER_CUSTOMER_DATA_SUCCESS:
-      return {
-        data: action.payload,
-        error: null,
-        loading: false,
-      };
-    case MASTER_CUSTOMER_DATA_FAILURE:
+    case MASTER_EQUIPMENT_DATA_FAILURE:
       return {
         ...state,
         error: action.payload,
         loading: false,
+      };
+    case MASTER_EQUIPMENT_GET_SUCCESS:
+      return {
+        ...state,
+        dataGet: action.payload,
+        error: null,
+        loading: false,
+      };
+    case SET_DATA_ADD_CUSTOMER:
+      return {
+        ...state,
+        dataAdd: action.payload,
+      };
+    case SET_DATA_EDIT_CUSTOMER:
+      return {
+        ...state,
+        dataEdit: action.payload,
       };
     default:
       return state;
   }
 };
 
-export const MasterCustomerPageReducer = (state, action) => {
+export const MasterEquipmentPageReducer = (state, action) => {
+  console.log("MasterEquipmentPageReducer");
   switch (action.type) {
     case SET_ENTRIES:
       return {
@@ -107,11 +125,6 @@ export const MasterCustomerPageReducer = (state, action) => {
         ...state,
         showAddCustomer: !state.showAddCustomer,
       };
-    case SET_DATA_ADD_CUSTOMER:
-      return {
-        ...state,
-        dataAddCustomer: action.payload,
-      };
     case SET_SHOW_EDIT_CUSTOMER:
       return {
         ...state,
@@ -122,11 +135,7 @@ export const MasterCustomerPageReducer = (state, action) => {
         ...state,
         canDataEditCustomer: !state.canDataEditCustomer,
       };
-    case SET_DATA_EDIT_CUSTOMER:
-      return {
-        ...state,
-        dataEditCustomer: action.payload,
-      };
+
     case SET_SHOW_CUSTOMER_NAME_FILTER:
       return {
         ...state,
@@ -169,7 +178,6 @@ export const MasterCustomerPageReducer = (state, action) => {
         totalEntries: 5,
         currentPage: 1,
         showAddCustomer: false,
-        dataAddCustomer: null,
         showEditCustomer: false,
         canDataEditCustomer: false,
         dataEditCustomer: null,
@@ -181,6 +189,13 @@ export const MasterCustomerPageReducer = (state, action) => {
         checkedData: [],
         showDeleteFilter: false,
       };
+    default:
+      return state;
+  }
+};
+
+export const MasterEquipmentModalReducer = (state, action) => {
+  switch (action.type) {
     case SET_SHOW_MODAL:
       return {
         ...state,
@@ -213,9 +228,3 @@ export const MasterCustomerPageReducer = (state, action) => {
       return state;
   }
 };
-
-const MasterCustomerReducer = combineReducers({
-  masterCustomerData: MasterCustomerDataReducer,
-});
-
-export { MasterCustomerReducer };
