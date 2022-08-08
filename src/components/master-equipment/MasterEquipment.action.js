@@ -15,15 +15,21 @@ export const SET_SHOW_EDIT_CUSTOMER = "SET_SHOW_EDIT_CUSTOMER";
 export const SET_DATA_EDIT_CUSTOMER = "SET_DATA_EDIT_CUSTOMER";
 export const SET_CAN_DATA_EDIT_CUSTOMER = "SET_CAN_DATA_EDIT_CUSTOMER";
 
+export const SET_SHOW_UNIT_CODE_FILTER = "SET_SHOW_UNIT_CODE_FILTER";
+export const SET_SHOW_UNIT_MODEL_FILTER = "SET_SHOW_UNIT_MODEL_FILTER";
+export const SET_SHOW_SERIAL_NUMBER_FILTER = "SET_SHOW_SERIAL_NUMBER_FILTER";
+export const SET_SHOW_PLANT_CODE_FILTER = "SET_SHOW_PLANT_CODE_FILTER";
 export const SET_SHOW_CUSTOMER_NAME_FILTER = "SET_SHOW_CUSTOMER_NAME_FILTER";
+export const SET_UNIT_CODE_FILTER = "SET_UNIT_CODE_FILTER";
+export const SET_UNIT_MODEL_FILTER = "SET_UNIT_MODEL_FILTER";
+export const SET_SERIAL_NUMBER_FILTER = "SET_SERIAL_NUMBER_FILTER";
+export const SET_PLANT_CODE_FILTER = "SET_PLANT_CODE_FILTER";
 export const SET_CUSTOMER_NAME_FILTER = "SET_CUSTOMER_NAME_FILTER";
-export const SET_SHOW_CITY_FILTER = "SET_SHOW_CITY_FILTER";
-export const SET_CITY_FILTER = "SET_CITY_FILTER";
-export const SET_SEARCH_ALL_FILTER = "SET_SEARCH_ALL_FILTER";
 export const SET_CHECKED_DATA = "SET_CHECKED_DATA";
 export const SET_SHOW_DELETE_FILTER = "SET_SHOW_DELETE_FILTER";
 
-export const RESET = "RESET";
+export const PAGE_RESET = "PAGE_RESET";
+export const FILTER_RESET = "FILTER_RESET";
 
 export const SET_SHOW_MODAL = "SET_SHOW_MODAL";
 export const SET_MODAL_STATUS = "SET_MODAL_STATUS";
@@ -48,9 +54,9 @@ export const getMasterEquipmentData = (dispatch, currentPage, totalEntries) => {
   //     masterEquipmentDataFailure(dispatch, err.message);
   //   });
   axios
-    .get(API.MASTER_EQUIPMENT)
+    .get(API.EQUIPMENT_FILTER)
     .then((response) => {
-      console.log(response.data)
+      console.log(response.data);
       masterEquipmentGetSuccess(dispatch, response.data);
       setTotalPage(dispatch, 1);
     })
@@ -60,50 +66,49 @@ export const getMasterEquipmentData = (dispatch, currentPage, totalEntries) => {
     });
 };
 
-export const getFilterMasterCustomerDataAction = (data, status) => {
-  return (dispatch) => {
+export const getFilterMasterCustomerData = (dispatch, data, status) => {
+  console.log(data, status);
+  if (data.length > 4) {
     console.log(data, status);
-    if (data.length > 4) {
-      console.log(data, status);
-      masterEquipmentDataRequest(dispatch);
-      axios
-        .get(API.CUSTOMER_FILTER + status + "=" + data)
-        .then((response) => {
-          console.log(response.data);
-          masterEquipmentGetSuccess(dispatch, response.data);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    } else if (status.length === 2) {
-      masterEquipmentDataRequest(dispatch);
-      axios
-        .get(
-          API.CUSTOMER_FILTER +
-            status[0] +
-            "=" +
-            data[0] +
-            "&" +
-            status[1] +
-            "=" +
-            data[1]
-        )
-        .then((response) => {
-          console.log(response.data);
-          masterEquipmentGetSuccess(dispatch, response.data);
-        })
-        .catch((err) => {
-          console.log(err.message);
-          masterEquipmentDataFailure(dispatch, err.message);
-        });
-    }
-  };
+    masterEquipmentDataRequest(dispatch);
+    axios
+      .get(API.CUSTOMER_FILTER + status + "=" + data)
+      .then((response) => {
+        console.log(response.data);
+        masterEquipmentGetSuccess(dispatch, response.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  } else if (status.length === 2) {
+    masterEquipmentDataRequest(dispatch);
+    axios
+      .get(
+        API.CUSTOMER_FILTER +
+          status[0] +
+          "=" +
+          data[0] +
+          "&" +
+          status[1] +
+          "=" +
+          data[1]
+      )
+      .then((response) => {
+        console.log(response.data);
+        masterEquipmentGetSuccess(dispatch, response.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        masterEquipmentDataFailure(dispatch, err.message);
+      });
+  }
 };
 
-export const postMasterCustomerData = (data) => {
-  console.log("postMasterCustomerData");
+export const postMasterEquipmentData = (data) => {
+  console.log("postMasterEquipmentData");
+  console.log(data);
   axios
-    .post(API.CUSTOMER, data)
+    .post(API.EQUIPMENT, data)
     .then(() => {
       console.log("berhasil post");
     })
@@ -112,10 +117,10 @@ export const postMasterCustomerData = (data) => {
     });
 };
 
-export const deleteMasterCustomerData = (custCode) => {
-  console.log("deleteMasterCustomerData");
+export const deleteMasterEquipmentData = (equipmentId) => {
+  console.log("deleteMasterEquipmentData");
   axios
-    .delete(API.CUSTOMER + "?customerId=" + custCode)
+    .delete(API.EQUIPMENT + "?customerId=" + equipmentId)
     .then(() => {
       console.log("berhasil delete");
     })
@@ -124,10 +129,10 @@ export const deleteMasterCustomerData = (custCode) => {
     });
 };
 
-export const putMasterCustomerData = (data) => {
+export const putMasterEquipmentData = (data) => {
   console.log("putMasterCustomerData");
   axios
-    .put(API.CUSTOMER, data)
+    .put(API.EQUIPMENT, data)
     .then(() => {
       console.log("berhasil put");
     })
@@ -210,10 +215,34 @@ export const setCanDataEditCustomer = (dispatch) => {
 };
 
 export const setDataEditCustomer = (dispatch, data) => {
-  console.log("sini")
+  console.log("sini");
   dispatch({
     type: SET_DATA_EDIT_CUSTOMER,
     payload: data,
+  });
+};
+
+export const setShowUnitCodeFilter = (dispatch) => {
+  dispatch({
+    type: SET_SHOW_UNIT_CODE_FILTER,
+  });
+};
+
+export const setShowUnitModelFilter = (dispatch) => {
+  dispatch({
+    type: SET_SHOW_UNIT_MODEL_FILTER,
+  });
+};
+
+export const setShowSerialNumberFilter = (dispatch) => {
+  dispatch({
+    type: SET_SHOW_SERIAL_NUMBER_FILTER,
+  });
+};
+
+export const setShowPlantCodeFilter = (dispatch) => {
+  dispatch({
+    type: SET_SHOW_PLANT_CODE_FILTER,
   });
 };
 
@@ -223,29 +252,37 @@ export const setShowCustomerNameFilter = (dispatch) => {
   });
 };
 
+export const setUnitCodeFilter = (dispatch, data) => {
+  dispatch({
+    type: SET_UNIT_CODE_FILTER,
+    payload: data,
+  });
+};
+
+export const setUnitModelFilter = (dispatch, data) => {
+  dispatch({
+    type: SET_UNIT_MODEL_FILTER,
+    payload: data,
+  });
+};
+
+export const setSerialNumberFilter = (dispatch, data) => {
+  dispatch({
+    type: SET_SERIAL_NUMBER_FILTER,
+    payload: data,
+  });
+};
+
+export const setPlantCodeFilter = (dispatch, data) => {
+  dispatch({
+    type: SET_PLANT_CODE_FILTER,
+    payload: data,
+  });
+};
+
 export const setCustomerNameFilter = (dispatch, data) => {
   dispatch({
     type: SET_CUSTOMER_NAME_FILTER,
-    payload: data,
-  });
-};
-
-export const setShowCityFilter = (dispatch) => {
-  dispatch({
-    type: SET_SHOW_CITY_FILTER,
-  });
-};
-
-export const setCityFilter = (dispatch, data) => {
-  dispatch({
-    type: SET_CITY_FILTER,
-    payload: data,
-  });
-};
-
-export const setSearchAllFilter = (dispatch, data) => {
-  dispatch({
-    type: SET_SEARCH_ALL_FILTER,
     payload: data,
   });
 };
@@ -264,9 +301,9 @@ export const setShowDeleteFilter = (dispatch, data) => {
   });
 };
 
-export const reset = (dispatch) => {
+export const pageReset = (dispatch) => {
   dispatch({
-    type: RESET,
+    type: PAGE_RESET,
   });
 };
 
@@ -303,3 +340,9 @@ export const modalReset = (dispatch) => {
     type: MODAL_RESET,
   });
 };
+
+export const filterReset = (dispatch) => {
+  dispatch({
+    type: FILTER_RESET,
+  })
+}

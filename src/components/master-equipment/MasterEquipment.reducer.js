@@ -4,7 +4,6 @@ import {
   MASTER_EQUIPMENT_GET_SUCCESS,
   SET_DATA_ADD_CUSTOMER,
   SET_DATA_EDIT_CUSTOMER,
-
   SET_ENTRIES,
   SET_SHOW_ENTRIES,
   SET_CURRENT_PAGE,
@@ -12,20 +11,25 @@ import {
   SET_SHOW_ADD_CUSTOMER,
   SET_SHOW_EDIT_CUSTOMER,
   SET_CAN_DATA_EDIT_CUSTOMER,
+  SET_SHOW_UNIT_CODE_FILTER,
+  SET_SHOW_UNIT_MODEL_FILTER,
+  SET_SHOW_SERIAL_NUMBER_FILTER,
+  SET_SHOW_PLANT_CODE_FILTER,
   SET_SHOW_CUSTOMER_NAME_FILTER,
+  SET_UNIT_CODE_FILTER,
+  SET_UNIT_MODEL_FILTER,
+  SET_SERIAL_NUMBER_FILTER,
+  SET_PLANT_CODE_FILTER,
   SET_CUSTOMER_NAME_FILTER,
-  SET_SHOW_CITY_FILTER,
-  SET_CITY_FILTER,
-  SET_SEARCH_ALL_FILTER,
   SET_CHECKED_DATA,
   SET_SHOW_DELETE_FILTER,
-  RESET,
-
+  PAGE_RESET,
   SET_SHOW_MODAL,
   SET_MODAL_STATUS,
   SET_MODAL_TEXT,
   SET_MODAL_SUBMIT,
   MODAL_RESET,
+  FILTER_RESET,
 } from "./MasterEquipment.action";
 
 export const initialStateData = {
@@ -33,9 +37,11 @@ export const initialStateData = {
   dataPost: null,
   dataEdit: null,
   dataAdd: null,
+  unitCodeFilter: "",
+  unitModelFilter: "",
+  serialNumberFilter: "",
+  plantCodeFilter: "",
   customerNameFilter: "",
-  cityFilter: "",
-  searchAllFilter: "",
   error: null,
   loading: false,
 };
@@ -48,8 +54,11 @@ export const initialStatePage = {
   showAddCustomer: false,
   showEditCustomer: false,
   canDataEditCustomer: false,
+  showUnitCodeFilter: false,
+  showUnitModelFilter: false,
+  showSerialNumberFilter: false,
+  showPlantCodeFilter: false,
   showCustomerNameFilter: false,
-  showCityFilter: false,
   checkedData: [],
   showDeleteFilter: false,
 };
@@ -91,6 +100,42 @@ export const MasterEquipmentDataReducer = (state, action) => {
       return {
         ...state,
         dataEdit: action.payload,
+      };
+    case SET_UNIT_CODE_FILTER:
+      return {
+        ...state,
+        unitCodeFilter: action.payload,
+      };
+    case SET_UNIT_MODEL_FILTER:
+      return {
+        ...state,
+        unitModelFilter: action.payload,
+      };
+    case SET_SERIAL_NUMBER_FILTER:
+      return {
+        ...state,
+        serialNumberFilter: action.payload,
+      };
+    case SET_PLANT_CODE_FILTER:
+      return {
+        ...state,
+        plantCodeFilter: action.payload,
+      };
+    case SET_CUSTOMER_NAME_FILTER:
+      return {
+        ...state,
+        customerNameFilter: action.payload,
+      };
+    case FILTER_RESET:
+      return {
+        ...state,
+        unitCodeFilter: "",
+        unitModelFilter: "",
+        serialNumberFilter: "",
+        plantCodeFilter: "",
+        customerNameFilter: "",
+        error: null,
+        loading: false,
       };
     default:
       return state;
@@ -135,33 +180,33 @@ export const MasterEquipmentPageReducer = (state, action) => {
         ...state,
         canDataEditCustomer: !state.canDataEditCustomer,
       };
-
+    case SET_SHOW_UNIT_CODE_FILTER:
+      return {
+        ...state,
+        showUnitCodeFilter: !state.showUnitCodeFilter,
+      };
+    case SET_SHOW_UNIT_MODEL_FILTER:
+      return {
+        ...state,
+        showUnitModelFilter: !state.showUnitModelFilter,
+      };
+    case SET_SHOW_SERIAL_NUMBER_FILTER:
+      return {
+        ...state,
+        showSerialNumberFilter: !state.showSerialNumberFilter,
+      };
+    case SET_SHOW_PLANT_CODE_FILTER:
+      return {
+        ...state,
+        showPlantCodeFilter: !state.showPlantCodeFilter,
+      };
     case SET_SHOW_CUSTOMER_NAME_FILTER:
       return {
         ...state,
         showCustomerNameFilter: !state.showCustomerNameFilter,
       };
-    case SET_CUSTOMER_NAME_FILTER:
-      return {
-        ...state,
-        customerNameFilter: action.payload,
-      };
-    case SET_SHOW_CITY_FILTER:
-      return {
-        ...state,
-        showCityFilter: !state.showCityFilter,
-      };
-    case SET_CITY_FILTER:
-      return {
-        ...state,
-        cityFilter: action.payload,
-      };
-    case SET_SEARCH_ALL_FILTER:
-      return {
-        ...state,
-        searchAllFilter: action.payload,
-      };
     case SET_CHECKED_DATA:
+      console.log(action.payload);
       return {
         ...state,
         checkedData: action.payload,
@@ -171,7 +216,7 @@ export const MasterEquipmentPageReducer = (state, action) => {
         ...state,
         showDeleteFilter: action.payload,
       };
-    case RESET:
+    case PAGE_RESET:
       return {
         ...state,
         showEntries: false,
@@ -181,11 +226,11 @@ export const MasterEquipmentPageReducer = (state, action) => {
         showEditCustomer: false,
         canDataEditCustomer: false,
         dataEditCustomer: null,
+        showUnitCodeFilter: false,
+        showUnitModelFilter: false,
+        showSerialNumberFilter: false,
+        showPlantCodeFilter: false,
         showCustomerNameFilter: false,
-        customerNameFilter: "",
-        showCityFilter: false,
-        cityFilter: "",
-        searchAllFilter: "",
         checkedData: [],
         showDeleteFilter: false,
       };

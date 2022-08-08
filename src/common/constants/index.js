@@ -28,6 +28,7 @@ export const ADD_EQUIPMENT_FORM = {
   SERIAL_NUMBER: "SERIAL NUMBER",
   MATERIAL_NUMBER: "MATERIAL NUMBER",
   MATERIAL_GROUP: "MATERIAL GROUP",
+  EQUIPMENT_NUMBER: "EQUIPMENT NUMBER",
   EQUIPMENT_CATEGORY: "EQUIPMENT CATEGORY",
   UNIT_CODE: "UNIT CODE",
   UNIT_CODE_DESC: "UNIT CODE DESCRIPTION",
@@ -83,6 +84,8 @@ export const ADD_EQUIPMENT_FORM = {
   KOMTRAX_METER_READING: "KOMTRAX METER READING",
   KOMTRAX_METER_READING_DATE: "KOMTRAX METER READING DATE",
   CONTRACT_PACKAGE: "CONTRACT PACKAGE",
+  IS_AVAILABLE: "IS AVAILABLE",
+  IS_ACTIVE: "IS ACTIVE",
 };
 
 export const API = {
@@ -92,6 +95,8 @@ export const API = {
   CUSTOMER_ALL: "https://localhost:7261/api/Customer/all",
   CUSTOMER_FILTER: "https://localhost:7261/api/Customer/filter?",
   CUSTOMER_PAGGING: "https://localhost:7261/api/Customer/filterpage?",
+  EQUIPMENT: "https://localhost:7261/api/MasterEquipment",
+  EQUIPMENT_FILTER: "https://localhost:7261/api/MasterEquipment/filter?",
   GENSET_DASHBOARD:
     "https://localhost:7261/api/Genset?EquipmentId=f51cdfa2-a524-466b-8607-5cd3b0b3cf29",
 };
