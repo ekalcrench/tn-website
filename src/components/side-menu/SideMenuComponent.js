@@ -152,6 +152,28 @@ export default function SideMenuComponent(props) {
           />
           <div className="list-text">{Component_Name.MASTER_EQUIPMENT}</div>
         </div>
+        {/* TN Location */}
+        <div
+          className={
+            props.sideMenu.currentComponent === Component_Name.TN_LOCATION
+              ? "side-menu-list side-menu-list-active"
+              : "side-menu-list"
+          }
+          onClick={() =>
+            props.setCurrentComponent(Component_Name.TN_LOCATION)
+          }
+        >
+          <img
+            src={
+              props.sideMenu.currentComponent === Component_Name.TN_LOCATION
+                ? AssignmentIconActive
+                : AssignmentIcon
+            }
+            alt="assignment-icon"
+            className="list-icon"
+          />
+          <div className="list-text">{Component_Name.TN_LOCATION}</div>
+        </div>
       </div>
     </div>
   );

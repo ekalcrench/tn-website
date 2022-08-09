@@ -6,6 +6,7 @@ export const Component_Name = {
   GENSET_MONITORING: "Genset Monitoring",
   MASTER_CUSTOMER: "Master Customer",
   MASTER_EQUIPMENT: "Master Equipment",
+  TN_LOCATION: "TN Location",
 };
 
 export const ADD_CUSTOMER_FORM = {
@@ -88,6 +89,11 @@ export const ADD_EQUIPMENT_FORM = {
   IS_ACTIVE: "IS ACTIVE",
 };
 
+export const ADD_TN_LOCATION_FORM = {
+  PLANT_CODE: "PLANT CODE",
+  PLANT_NAME: "PLANT NAME",
+};
+
 export const API = {
   MASTER_CUSTOMER: "http://localhost:3003/MasterCustomer",
   MASTER_EQUIPMENT: "http://localhost:3003/MasterEquipment",
@@ -97,6 +103,8 @@ export const API = {
   CUSTOMER_PAGGING: "https://localhost:7261/api/Customer/filterpage?",
   EQUIPMENT: "https://localhost:7261/api/MasterEquipment",
   EQUIPMENT_FILTER: "https://localhost:7261/api/MasterEquipment/filter?",
+  LOCATION: "https://localhost:7261/api/TnLocation",
+  LOCATION_FILTER: "https://localhost:7261/api/TnLocation/filter?",
   GENSET_DASHBOARD:
     "https://localhost:7261/api/Genset?EquipmentId=f51cdfa2-a524-466b-8607-5cd3b0b3cf29",
 };

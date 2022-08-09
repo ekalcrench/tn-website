@@ -3,6 +3,7 @@ import { GensetMonitoring } from "../../components/genset-monitoring";
 import { Component_Name } from "../../common/constants";
 import { MasterCustomer } from "../../components/master-customer";
 import { MasterEquipment } from "../../components/master-equipment";
+import { TnLocation } from "../../components/tn-location";
 
 function Home(props) {
   return (
@@ -15,6 +16,9 @@ function Home(props) {
       )}
       {props.sideMenu.currentComponent === Component_Name.MASTER_EQUIPMENT && (
         <MasterEquipment />
+      )}
+      {props.sideMenu.currentComponent === Component_Name.TN_LOCATION && (
+        <TnLocation />
       )}
     </div>
   );
