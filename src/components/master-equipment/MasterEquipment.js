@@ -1,9 +1,6 @@
 import React, { useEffect, useLayoutEffect, useReducer } from "react";
 import "./MasterEquipment.scss";
-import {
-  DropdownIconWhite,
-  IconTrash,
-} from "../../assets/icons";
+import { DropdownIconWhite, IconTrash } from "../../assets/icons";
 import { ADD_EQUIPMENT_FORM } from "../../common/constants";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { initialFormState, validate } from "./MasterEquipment.form";
@@ -21,6 +18,7 @@ import {
   postMasterEquipmentData,
   deleteMasterEquipmentData,
   putMasterEquipmentData,
+  getFilterMasterEquipmentData,
   setShowEntries,
   setEntries,
   setCurrentPage,
@@ -100,21 +98,34 @@ export default function MasterEquipment(props) {
       console.log("Serial Number : ", stateData.serialNumberFilter);
       console.log("Plant Code : ", stateData.plantCodeFilter);
       console.log("Customer Name : ", stateData.customerNameFilter);
-      // if (state.customerNameFilter.length > 0 && state.cityFilter.length > 0) {
-      //   const data = [state.cityFilter, state.customerNameFilter];
-      //   const status = ["City", "CustomerName"];
-      //   console.log(data, status);
-      //   props.getFilterMasterCustomerData(data, status);
-      // } else if (state.customerNameFilter.length > 0) {
-      //   console.log(state.customerNameFilter, "CustomerName");
-      //   props.getFilterMasterCustomerData(
-      //     state.customerNameFilter,
-      //     "CustomerName"
-      //   );
-      // } else if (state.cityFilter.length > 0) {
-      //   console.log(state.cityFilter, "City");
-      //   props.getFilterMasterCustomerData(state.cityFilter, "City");
-      // }
+      let data1 = "";
+      let data2 = "";
+      let data3 = "";
+      let data4 = "";
+      let data5 = "";
+      if (stateData.unitCodeFilter.length > 0) {
+        data1 = "UnitCode=" + stateData.unitCodeFilter + "&";
+      }
+      if (stateData.unitModelFilter.length > 0) {
+        data2 = "UnitModel=" + stateData.unitModelFilter + "&";
+      }
+      if (stateData.serialNumberFilter.length > 0) {
+        data3 = "SerialNumber=" + stateData.serialNumberFilter + "&";
+      }
+      if (stateData.plantCodeFilter.length > 0) {
+        data4 = "PlantCode=" + stateData.plantCodeFilter + "&";
+      }
+      if (stateData.customerNameFilter.length > 0) {
+        data5 = "CustomerName=" + stateData.customerNameFilter;
+      }
+      getFilterMasterEquipmentData(
+        dispatchData,
+        data1,
+        data2,
+        data3,
+        data4,
+        data5
+      );
     }
   }, [
     stateData.unitCodeFilter,

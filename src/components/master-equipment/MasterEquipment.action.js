@@ -66,42 +66,28 @@ export const getMasterEquipmentData = (dispatch, currentPage, totalEntries) => {
     });
 };
 
-export const getFilterMasterCustomerData = (dispatch, data, status) => {
-  console.log(data, status);
-  if (data.length > 4) {
-    console.log(data, status);
-    masterEquipmentDataRequest(dispatch);
-    axios
-      .get(API.CUSTOMER_FILTER + status + "=" + data)
-      .then((response) => {
-        console.log(response.data);
-        masterEquipmentGetSuccess(dispatch, response.data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  } else if (status.length === 2) {
-    masterEquipmentDataRequest(dispatch);
-    axios
-      .get(
-        API.CUSTOMER_FILTER +
-          status[0] +
-          "=" +
-          data[0] +
-          "&" +
-          status[1] +
-          "=" +
-          data[1]
-      )
-      .then((response) => {
-        console.log(response.data);
-        masterEquipmentGetSuccess(dispatch, response.data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-        masterEquipmentDataFailure(dispatch, err.message);
-      });
-  }
+export const getFilterMasterEquipmentData = (
+  dispatch,
+  data1,
+  data2,
+  data3,
+  data4,
+  data5
+) => {
+  console.log(data1, data2, data3, data4, data5);
+  // if (data.length > 4) {
+  masterEquipmentDataRequest(dispatch);
+  axios
+    .get(API.EQUIPMENT_FILTER + data1 + data2 + data3 + data4 + data5)
+    .then((response) => {
+      console.log(response.data);
+      masterEquipmentGetSuccess(dispatch, response.data);
+    })
+    .catch((err) => {
+      console.log(err.message);
+      masterEquipmentDataFailure(dispatch, err.message);
+    });
+  // }
 };
 
 export const postMasterEquipmentData = (data) => {
@@ -344,5 +330,5 @@ export const modalReset = (dispatch) => {
 export const filterReset = (dispatch) => {
   dispatch({
     type: FILTER_RESET,
-  })
-}
+  });
+};
