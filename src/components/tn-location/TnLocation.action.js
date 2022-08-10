@@ -32,31 +32,21 @@ export const SET_MODAL_SUBMIT = "SET_MODAL_SUBMIT";
 
 export const MODAL_RESET = "MODAL_RESET";
 
-export const getTnLocationData = (dispatch, currentPage, totalEntries) => {
+export const getTnLocationData = (dispatchData, dispatchPage, currentPage, totalEntries) => {
   console.log("getTnLocationData");
-  tnLocationDataRequest(dispatch);
-  // axios
-  //   .get(
-  //     API.CUSTOMER_PAGGING + "Page=" + currentPage + "&PageSize=" + totalEntries
-  //   )
-  //   .then((response) => {
-  //     masterEquipmentGetSuccess(dispatch, response.data.data);
-  //     setTotalPage(dispatch, response.data.totalPageCount);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err.message);
-  //     masterEquipmentDataFailure(dispatch, err.message);
-  //   });
+  tnLocationDataRequest(dispatchData);
   axios
-    .get(API.LOCATION)
+    .get(
+      API.LOCATION_PAGGING + "Page=" + currentPage + "&PageSize=" + totalEntries
+    )
     .then((response) => {
-      console.log(response.data);
-      tnLocationGetSuccess(dispatch, response.data);
-      setTotalPage(dispatch, 1);
+      console.log(response.data)
+      setTotalPage(dispatchPage, response.data.totalPageCount);
+      tnLocationGetSuccess(dispatchData, response.data.data);
     })
     .catch((err) => {
       console.log(err.message);
-      tnLocationDataFailure(dispatch, err.message);
+      tnLocationDataFailure(dispatchData, err.message);
     });
 };
 
@@ -90,10 +80,10 @@ export const postTnLocationData = (data) => {
     });
 };
 
-export const deleteTnLocationData = (locationId) => {
+export const deleteTnLocationData = (id) => {
   console.log("deleteTnLocationData");
   axios
-    .delete(API.LOCATION + "?customerId=" + locationId)
+    .delete(API.LOCATION + "?id=" + id)
     .then(() => {
       console.log("berhasil delete");
     })
@@ -154,7 +144,8 @@ export const setCurrentPage = (dispatch, data) => {
   });
 };
 
-export const setTotalPage = (dispatch, data) => {
+const setTotalPage = (dispatch, data) => {
+  console.log("setTotalPage", data)
   dispatch({
     type: SET_TOTAL_PAGES,
     payload: data,

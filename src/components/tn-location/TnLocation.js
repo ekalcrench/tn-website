@@ -1,6 +1,10 @@
 import React, { useEffect, useLayoutEffect, useReducer } from "react";
 import "./TnLocation.scss";
-import { DropdownIconWhite, IconTrash } from "../../assets/icons";
+import {
+  DropdownIconWhite,
+  KeyboardArrowDown,
+  IconTrash,
+} from "../../assets/icons";
 import { ADD_TN_LOCATION_FORM } from "../../common/constants";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { initialFormState, validate } from "./TnLocation.form";
@@ -61,12 +65,15 @@ export default function TnLocation(props) {
   useLayoutEffect(() => {
     getTnLocationData(
       dispatchData,
+      dispatchPage,
       statePage.currentPage,
       statePage.totalEntries
     );
   }, []);
 
   useEffect(() => {
+    console.log(stateData.dataGet);
+    console.log(statePage.totalPage)
     if (stateData.dataGet !== null) {
       setCheckedData(
         dispatchPage,
@@ -75,15 +82,16 @@ export default function TnLocation(props) {
     }
   }, [stateData.dataGet]);
 
-  //   useEffect(() => {
-  //     if (props.masterCustomerData.data !== null) {
-  //       props.getMasterCustomerData(
-  //         dispatch,
-  //         state.currentPage,
-  //         state.totalEntries
-  //       );
-  //     }
-  //   }, [state.currentPage, state.totalEntries]);
+  useEffect(() => {
+    if (stateData.dataGet !== null) {
+      getTnLocationData(
+        dispatchData,
+        dispatchPage,
+        statePage.currentPage,
+        statePage.totalEntries
+      );
+    }
+  }, [statePage.currentPage, statePage.totalEntries]);
 
   useEffect(() => {
     if (stateData.dataGet !== null) {
@@ -125,6 +133,7 @@ export default function TnLocation(props) {
         postTnLocationData(stateData.dataAdd);
         getTnLocationData(
           dispatchData,
+          dispatchPage,
           statePage.currentPage,
           statePage.totalEntries
         );
@@ -132,6 +141,7 @@ export default function TnLocation(props) {
         putTnLocationData(stateData.dataEdit);
         getTnLocationData(
           dispatchData,
+          dispatchPage,
           statePage.currentPage,
           statePage.totalEntries
         );
@@ -141,10 +151,10 @@ export default function TnLocation(props) {
     }
   }, [stateModal.modalSubmit]);
 
-  //   const handleEntries = (index) => {
-  //     setShowEntries(dispatch);
-  //     setEntries(dispatch, index);
-  //   };
+  const handleEntries = (index) => {
+    setShowEntries(dispatchPage);
+    setEntries(dispatchPage, index);
+  };
 
   const handleCheckedData = (position) => {
     console.log(stateData.dataGet[position]);
@@ -159,11 +169,12 @@ export default function TnLocation(props) {
   const handleDeleteData = () => {
     statePage.checkedData.map((data, index) => {
       if (data === true) {
-        deleteTnLocationData(stateData.dataGet[index].equipmentId);
+        deleteTnLocationData(stateData.dataGet[index].id);
       }
     });
     getTnLocationData(
       dispatchData,
+      dispatchPage,
       statePage.currentPage,
       statePage.totalEntries
     );
@@ -224,24 +235,24 @@ export default function TnLocation(props) {
                   <div className="label">{ADD_TN_LOCATION_FORM.PLANT_CODE}</div>
                   <Field
                     className="input"
-                    placeholder="Input Model Number..."
+                    placeholder="Input Plant Code..."
                     type="text"
                     name="plantCode"
                   />
                   <div className="error-message">
-                    <ErrorMessage name="unitModel" />
+                    <ErrorMessage name="plantCode" />
                   </div>
                 </div>
                 <div className="form-input">
                   <div className="label">{ADD_TN_LOCATION_FORM.PLANT_NAME}</div>
                   <Field
                     className="input"
-                    placeholder="Input Unit Model..."
+                    placeholder="Input Plant Name..."
                     type="text"
                     name="plantName"
                   />
                   <div className="error-message">
-                    <ErrorMessage name="unitModel" />
+                    <ErrorMessage name="plantName" />
                   </div>
                 </div>
               </div>
@@ -363,164 +374,150 @@ export default function TnLocation(props) {
           />
         </div>
         <div
-          className="item unit-code"
-          onClick={() => setDataEditLocation(dispatchData, data)}
-        >
-          {data.unitCode}
-        </div>
-        <div
-          className="item unit-model"
-          onClick={() => setDataEditLocation(dispatchData, data)}
-        >
-          {data.unitModel}
-        </div>
-        <div
-          className="item serial-number"
-          onClick={() => setDataEditLocation(dispatchData, data)}
-        >
-          {data.serialNumber}
-        </div>
-        <div
           className="item plant-code"
           onClick={() => setDataEditLocation(dispatchData, data)}
         >
           {data.plantCode}
         </div>
         <div
-          className="item customer-name"
+          className="item plant-name"
           onClick={() => setDataEditLocation(dispatchData, data)}
         >
-          {data.customerName}
+          {data.plantName}
         </div>
       </div>
     );
   };
 
-  //   const renderPagination = () => {
-  //     return (
-  //       <div className="pagination">
-  //         <div className="pagination-filter">
-  //           <div>Show</div>
-  //           <div className="filter-entries">
-  //             {state.showEntries ? (
-  //               <div className="multiple-entries">
-  //                 {state.totalEntries === 4 ? (
-  //                   <div
-  //                     className="entries entries-top entries-active"
-  //                     onClick={() => setShowEntries(dispatch)}
-  //                   >
-  //                     4
-  //                   </div>
-  //                 ) : (
-  //                   <div
-  //                     className="entries entries-top"
-  //                     onClick={() => handleEntries(4)}
-  //                   >
-  //                     4
-  //                   </div>
-  //                 )}
-  //                 {Array.from(Array(5), (_e, index) => {
-  //                   if (index + 5 === state.totalEntries) {
-  //                     return (
-  //                       <div
-  //                         key={index + 5}
-  //                         className="entries entries-active"
-  //                         onClick={() => setShowEntries(dispatch)}
-  //                       >
-  //                         {index + 5}
-  //                       </div>
-  //                     );
-  //                   } else {
-  //                     return (
-  //                       <div
-  //                         key={index + 5}
-  //                         className="entries"
-  //                         onClick={() => handleEntries(index + 5)}
-  //                       >
-  //                         {index + 5}
-  //                       </div>
-  //                     );
-  //                   }
-  //                 })}
-  //                 {state.totalEntries === 10 ? (
-  //                   <div
-  //                     className="entries entries-bottom entries-active"
-  //                     onClick={() => setShowEntries(dispatch)}
-  //                   >
-  //                     10
-  //                   </div>
-  //                 ) : (
-  //                   <div
-  //                     className="entries entries-bottom"
-  //                     onClick={() => handleEntries(10)}
-  //                   >
-  //                     10
-  //                   </div>
-  //                 )}
-  //               </div>
-  //             ) : (
-  //               <div className="entries">{state.totalEntries}</div>
-  //             )}
-  //             <div
-  //               className={
-  //                 state.showEntries
-  //                   ? "dropdown-arrow dropdown-show-entries"
-  //                   : "dropdown-arrow"
-  //               }
-  //               onClick={() => setShowEntries(dispatch)}
-  //             >
-  //               <img
-  //                 src={KeyboardArrowDown}
-  //                 alt="dropdown-arrow"
-  //                 className="arrow-item"
-  //               />
-  //             </div>
-  //           </div>
-  //           <div>Entries</div>
-  //         </div>
-  //         <div className="page">
-  //           {/* << */}
-  //           {state.currentPage !== 1 && (
-  //             <div
-  //               className="page-item page-item-left"
-  //               onClick={() => setCurrentPage(dispatch, state.currentPage - 1)}
-  //             >
-  //               {"<<"}
-  //             </div>
-  //           )}
-  //           {/* currentPage - 1 */}
-  //           {state.currentPage !== 1 && (
-  //             <div className="page-item">{state.currentPage - 1}</div>
-  //           )}
-  //           {/* currentPage */}
-  //           {state.currentPage === 1 ? (
-  //             <div className="page-item page-active page-item-left">
-  //               {state.currentPage}
-  //             </div>
-  //           ) : state.currentPage === state.totalPage ? (
-  //             <div className="page-item page-active page-item-right">
-  //               {state.currentPage}
-  //             </div>
-  //           ) : (
-  //             <div className="page-item page-active">{state.currentPage}</div>
-  //           )}
-  //           {/* currentPage + 1 */}
-  //           {state.currentPage !== state.totalPage && (
-  //             <div className="page-item">{state.currentPage + 1}</div>
-  //           )}
-  //           {/* >> */}
-  //           {state.currentPage !== state.totalPage && (
-  //             <div
-  //               className="page-item page-item-right"
-  //               onClick={() => setCurrentPage(dispatch, state.currentPage + 1)}
-  //             >
-  //               {">>"}
-  //             </div>
-  //           )}
-  //         </div>
-  //       </div>
-  //     );
-  //   };
+  const renderPagination = () => {
+    return (
+      <div className="pagination">
+        <div className="pagination-filter">
+          <div>Show</div>
+          <div className="filter-entries">
+            {statePage.showEntries ? (
+              <div className="multiple-entries">
+                {statePage.totalEntries === 4 ? (
+                  <div
+                    className="entries entries-top entries-active"
+                    onClick={() => setShowEntries(dispatchPage)}
+                  >
+                    4
+                  </div>
+                ) : (
+                  <div
+                    className="entries entries-top"
+                    onClick={() => handleEntries(4)}
+                  >
+                    4
+                  </div>
+                )}
+                {Array.from(Array(5), (_e, index) => {
+                  if (index + 5 === statePage.totalEntries) {
+                    return (
+                      <div
+                        key={index + 5}
+                        className="entries entries-active"
+                        onClick={() => setShowEntries(dispatchPage)}
+                      >
+                        {index + 5}
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div
+                        key={index + 5}
+                        className="entries"
+                        onClick={() => handleEntries(index + 5)}
+                      >
+                        {index + 5}
+                      </div>
+                    );
+                  }
+                })}
+                {statePage.totalEntries === 10 ? (
+                  <div
+                    className="entries entries-bottom entries-active"
+                    onClick={() => setShowEntries(dispatchPage)}
+                  >
+                    10
+                  </div>
+                ) : (
+                  <div
+                    className="entries entries-bottom"
+                    onClick={() => handleEntries(10)}
+                  >
+                    10
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="entries">{statePage.totalEntries}</div>
+            )}
+            <div
+              className={
+                statePage.showEntries
+                  ? "dropdown-arrow dropdown-show-entries"
+                  : "dropdown-arrow"
+              }
+              onClick={() => setShowEntries(dispatchPage)}
+            >
+              <img
+                src={KeyboardArrowDown}
+                alt="dropdown-arrow"
+                className="arrow-item"
+              />
+            </div>
+          </div>
+          <div>Entries</div>
+        </div>
+        <div className="page">
+          {/* << */}
+          {statePage.currentPage !== 1 && (
+            <div
+              className="page-item page-item-left"
+              onClick={() =>
+                setCurrentPage(dispatchPage, statePage.currentPage - 1)
+              }
+            >
+              {"<<"}
+            </div>
+          )}
+          {/* currentPage - 1 */}
+          {statePage.currentPage !== 1 && (
+            <div className="page-item">{statePage.currentPage - 1}</div>
+          )}
+          {/* currentPage */}
+          {statePage.currentPage === 1 ? (
+            <div className="page-item page-active page-item-left">
+              {statePage.currentPage}
+            </div>
+          ) : statePage.currentPage === statePage.totalPage ? (
+            <div className="page-item page-active page-item-right">
+              {statePage.currentPage}
+            </div>
+          ) : (
+            <div className="page-item page-active">{statePage.currentPage}</div>
+          )}
+          {/* currentPage + 1 */}
+          {statePage.currentPage !== statePage.totalPage && (
+            <div className="page-item">{statePage.currentPage + 1}</div>
+          )}
+          {/* >> */}
+          {statePage.currentPage !== statePage.totalPage && (
+            <div
+              className="page-item page-item-right"
+              onClick={() =>
+                setCurrentPage(dispatchPage, statePage.currentPage + 1)
+              }
+            >
+              {">>"}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="background-tn-location">
@@ -543,28 +540,28 @@ export default function TnLocation(props) {
         </div>
         {statePage.showAddLocation ? (
           renderForm()
-        ) : statePage.showEditLocation? (
+        ) : statePage.showEditLocation ? (
           renderForm(stateData.dataEdit)
         ) : (
           <div>
             <div
-              className="add-customer-button"
+              className="add-location-button"
               onClick={() => setShowAddLocation(dispatchPage)}
             >
-              + Add Customer
+              + Add Location
             </div>
             <div>
               {renderFilter()}
               <div className="table-header">
-                <div className="unit-code">Unit Code</div>
-                <div className="unit-model">Unit Model</div>
+                <div className="plant-code">Plant Code</div>
+                <div className="plant-name">Plant Name</div>
               </div>
               <div className="table-body">
                 {stateData.dataGet?.map((data, index) => {
                   return <div key={index}>{renderTable(data, index)}</div>;
                 })}
               </div>
-              {/* {renderPagination()} */}
+              {renderPagination()}
             </div>
           </div>
         )}

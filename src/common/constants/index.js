@@ -103,8 +103,8 @@ export const API = {
   CUSTOMER_PAGGING: "https://localhost:7261/api/Customer/filterpage?",
   EQUIPMENT: "https://localhost:7261/api/MasterEquipment",
   EQUIPMENT_FILTER: "https://localhost:7261/api/MasterEquipment/filter?",
-  LOCATION: "https://localhost:7261/api/TnLocation",
-  LOCATION_FILTER: "https://localhost:7261/api/TnLocation/filter?",
+  LOCATION: "https://localhost:7261/api/TNLocation",
+  LOCATION_PAGGING: "https://localhost:7261/api/TNLocation/filterpage?",
   GENSET_DASHBOARD:
     "https://localhost:7261/api/Genset?EquipmentId=f51cdfa2-a524-466b-8607-5cd3b0b3cf29",
 };

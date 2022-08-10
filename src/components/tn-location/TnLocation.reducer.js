@@ -131,6 +131,7 @@ export const TnLocationPageReducer = (state, action) => {
         currentPage: action.payload,
       };
     case SET_TOTAL_PAGES:
+      console.log("REDUCER SET_TOTAL_PAGES")
       return {
         ...state,
         totalPage: action.payload,
@@ -161,7 +162,6 @@ export const TnLocationPageReducer = (state, action) => {
         showPlantNameFilter: !state.showUnitModelFilter,
       };
     case SET_CHECKED_DATA:
-      console.log(action.payload);
       return {
         ...state,
         checkedData: action.payload,

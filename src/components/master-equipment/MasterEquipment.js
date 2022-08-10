@@ -3,6 +3,7 @@ import "./MasterEquipment.scss";
 import { DropdownIconWhite, IconTrash } from "../../assets/icons";
 import { ADD_EQUIPMENT_FORM } from "../../common/constants";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as XLSX from "xlsx";
 import { initialFormState, validate } from "./MasterEquipment.form";
 import { Modal } from "../../helper/modal";
 import {
@@ -222,6 +223,21 @@ export default function MasterEquipment(props) {
     setShowModal(dispatchModal, modalShow);
     setModalStatus(dispatchModal, modalStatus);
     setModalText(dispatchModal, modalText);
+  };
+
+  const handleFile = (event) => {
+    const [file] = event.target.files;
+    const reader = new FileReader();
+
+    reader.onload = (evt) => {
+      const bstr = evt.target.result;
+      const wb = XLSX.read(bstr, { type: "binary" });
+      const wsname = wb.SheetNames[2];
+      const ws = wb.Sheets[wsname];
+      const data = XLSX.utils.sheet_to_csv(ws, { header: 1 });
+      console.log(data);
+    };
+    reader.readAsBinaryString(file);
   };
 
   const handleReset = () => {
@@ -1178,6 +1194,7 @@ export default function MasterEquipment(props) {
               <div className="text">Delete Customer</div>
             </div>
           )}
+          <input className="import-file" type="file" onChange={handleFile} />
           <div className="table-filter-reset" onClick={() => handleReset()}>
             reset
           </div>

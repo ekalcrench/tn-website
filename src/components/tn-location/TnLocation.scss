@@ -30,7 +30,7 @@
         margin-left: vw(10);
       }
     }
-    .add-customer-button {
+    .add-location-button {
       height: vw(40);
       width: vw(145.66);
       margin-top: vw(24);
@@ -166,12 +166,12 @@
       color: white;
       font-family: "Lato-Bold";
       font-size: vw(14);
-      .unit-code {
-        margin-left: calc(vw(25) + vw(18.39) + vw(35));
-        width: 18%;
+      .plant-code {
+        margin-left: calc(vw(25) + vw(18.39) + vw(70));
+        width: 35%;
       }
-      .unit-model {
-        width: 18%;
+      .plant-name {
+        width: 35%;
       }
     }
     .table-body {
@@ -183,13 +183,13 @@
         font-family: "Lato-Bold";
         margin-bottom: vw(4);
         .item {
-          width: 18%;
+          width: 35%;
           height: 100%;
           display: flex;
           align-items: center;
         }
         .checkbox {
-          width: calc(vw(25) + vw(18.39) + vw(40));
+          width: calc(vw(25) + vw(18.39) + vw(70));
           .checkbox-item {
             margin: 0px;
             margin-left: vw(25);
@@ -203,21 +203,11 @@
             background-color: white;
           }
         }
-        .unit-code {
-          font-size: vw(15);
-        }
-        .unit-model {
-          font-size: vw(14);
-        }
-        .serial-number {
-          font-size: vw(15);
-        }
         .plant-code {
-          font-size: vw(15);
+          font-size: vw(16);
         }
-        .customer-name {
-          width: 28%;
-          font-size: vw(14);
+        .plant-name {
+          font-size: vw(15);
         }
       }
       .table-list:hover {
