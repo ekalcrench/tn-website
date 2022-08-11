@@ -59,7 +59,6 @@ export const initialStateModal = {
 };
 
 export const TnLocationDataReducer = (state, action) => {
-  console.log("TnLocationDataReducer");
   switch (action.type) {
     case TN_LOCATION_DATA_REQUEST:
       return {
@@ -113,7 +112,6 @@ export const TnLocationDataReducer = (state, action) => {
 };
 
 export const TnLocationPageReducer = (state, action) => {
-  console.log("TnLocationPageReducer");
   switch (action.type) {
     case SET_ENTRIES:
       return {
@@ -131,7 +129,6 @@ export const TnLocationPageReducer = (state, action) => {
         currentPage: action.payload,
       };
     case SET_TOTAL_PAGES:
-      console.log("REDUCER SET_TOTAL_PAGES")
       return {
         ...state,
         totalPage: action.payload,

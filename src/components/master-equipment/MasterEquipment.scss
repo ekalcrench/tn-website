@@ -139,6 +139,15 @@
         .delete-customer:hover {
           cursor: pointer;
         }
+        .import-file {
+          border: 1px solid #ccc;
+          display: inline-block;
+          padding: 6px 12px;
+          cursor: pointer;
+        }
+        input[type="file"] {
+          display: none;
+        }
         .table-filter-reset {
           margin-left: vw(27.78);
           background-color: map-get($colors, tn-color);
@@ -426,6 +435,7 @@
         display: flex;
         justify-content: right;
         margin-top: vw(24);
+        margin-bottom: vw(30);
         height: vw(40);
         .button {
           width: vw(144.38);

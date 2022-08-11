@@ -39,7 +39,6 @@ export const SET_MODAL_SUBMIT = "SET_MODAL_SUBMIT";
 export const MODAL_RESET = "MODAL_RESET";
 
 export const getMasterEquipmentData = (dispatch, currentPage, totalEntries) => {
-  console.log("masterCustomerDataRequest");
   masterEquipmentDataRequest(dispatch);
   // axios
   //   .get(
@@ -74,7 +73,6 @@ export const getFilterMasterEquipmentData = (
   data4,
   data5
 ) => {
-  console.log(data1, data2, data3, data4, data5);
   // if (data.length > 4) {
   masterEquipmentDataRequest(dispatch);
   axios

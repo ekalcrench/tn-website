@@ -40,7 +40,6 @@ export const getTnLocationData = (dispatchData, dispatchPage, currentPage, total
       API.LOCATION_PAGGING + "Page=" + currentPage + "&PageSize=" + totalEntries
     )
     .then((response) => {
-      console.log(response.data)
       setTotalPage(dispatchPage, response.data.totalPageCount);
       tnLocationGetSuccess(dispatchData, response.data.data);
     })
@@ -145,7 +144,6 @@ export const setCurrentPage = (dispatch, data) => {
 };
 
 const setTotalPage = (dispatch, data) => {
-  console.log("setTotalPage", data)
   dispatch({
     type: SET_TOTAL_PAGES,
     payload: data,

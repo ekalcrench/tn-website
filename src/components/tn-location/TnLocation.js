@@ -73,7 +73,6 @@ export default function TnLocation(props) {
 
   useEffect(() => {
     console.log(stateData.dataGet);
-    console.log(statePage.totalPage)
     if (stateData.dataGet !== null) {
       setCheckedData(
         dispatchPage,
@@ -95,8 +94,8 @@ export default function TnLocation(props) {
 
   useEffect(() => {
     if (stateData.dataGet !== null) {
-      console.log("Unit Code : ", stateData.unitCodeFilter);
-      console.log("Unit Model : ", stateData.unitModelFilter);
+      console.log("Plant Code : ", stateData.plantCodeFilter);
+      console.log("Plant Model : ", stateData.plantNameFilter);
       let data1 = "";
       let data2 = "";
       if (stateData.plantCodeFilter.length > 0) {

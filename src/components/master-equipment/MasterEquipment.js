@@ -94,11 +94,6 @@ export default function MasterEquipment(props) {
 
   useEffect(() => {
     if (stateData.dataGet !== null) {
-      console.log("Unit Code : ", stateData.unitCodeFilter);
-      console.log("Unit Model : ", stateData.unitModelFilter);
-      console.log("Serial Number : ", stateData.serialNumberFilter);
-      console.log("Plant Code : ", stateData.plantCodeFilter);
-      console.log("Customer Name : ", stateData.customerNameFilter);
       let data1 = "";
       let data2 = "";
       let data3 = "";
@@ -146,7 +141,6 @@ export default function MasterEquipment(props) {
   }, [statePage.checkedData]);
 
   useEffect(() => {
-    console.log(stateData.dataEdit);
     if (stateData.dataEdit !== null) {
       setShowEditCustomer(dispatchPage, true);
     }
@@ -225,19 +219,17 @@ export default function MasterEquipment(props) {
     setModalText(dispatchModal, modalText);
   };
 
-  const handleFile = (event) => {
-    const [file] = event.target.files;
-    const reader = new FileReader();
+  const handleFile = async (event) => {
+    const myFile = event.target.files[0];
+    const data = await myFile.arrayBuffer();
 
-    reader.onload = (evt) => {
-      const bstr = evt.target.result;
-      const wb = XLSX.read(bstr, { type: "binary" });
-      const wsname = wb.SheetNames[2];
-      const ws = wb.Sheets[wsname];
-      const data = XLSX.utils.sheet_to_csv(ws, { header: 1 });
-      console.log(data);
-    };
-    reader.readAsBinaryString(file);
+    const wb = XLSX.read(data);
+    const wsname = wb.SheetNames[0];
+    const ws = wb.Sheets[wsname];
+    ws["!ref"] = "A2:BM1000";
+
+    const sheetData = XLSX.utils.sheet_to_json(ws);
+    console.log("sheetData : ", sheetData);
   };
 
   const handleReset = () => {
@@ -1194,7 +1186,16 @@ export default function MasterEquipment(props) {
               <div className="text">Delete Customer</div>
             </div>
           )}
-          <input className="import-file" type="file" onChange={handleFile} />
+          <label className="import-file">
+            <input
+              type="file"
+              accept="xlsx, xls"
+              multiple={false}
+              onChange={(event) => handleFile(event)}
+            />
+            Input File
+          </label>
+
           <div className="table-filter-reset" onClick={() => handleReset()}>
             reset
           </div>
@@ -1406,7 +1407,7 @@ export default function MasterEquipment(props) {
               className="add-customer-button"
               onClick={() => setShowAddCustomer(dispatchPage)}
             >
-              + Add Customer
+              + Add Equipments
             </div>
             <div>
               {renderFilter()}

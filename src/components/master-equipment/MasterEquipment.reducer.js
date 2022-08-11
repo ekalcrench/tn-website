@@ -71,7 +71,6 @@ export const initialStateModal = {
 };
 
 export const MasterEquipmentDataReducer = (state, action) => {
-  console.log("MasterEquipmentDataReducer");
   switch (action.type) {
     case MASTER_EQUIPMENT_DATA_REQUEST:
       return {
@@ -143,7 +142,6 @@ export const MasterEquipmentDataReducer = (state, action) => {
 };
 
 export const MasterEquipmentPageReducer = (state, action) => {
-  console.log("MasterEquipmentPageReducer");
   switch (action.type) {
     case SET_ENTRIES:
       return {
@@ -206,7 +204,6 @@ export const MasterEquipmentPageReducer = (state, action) => {
         showCustomerNameFilter: !state.showCustomerNameFilter,
       };
     case SET_CHECKED_DATA:
-      console.log(action.payload);
       return {
         ...state,
         checkedData: action.payload,
